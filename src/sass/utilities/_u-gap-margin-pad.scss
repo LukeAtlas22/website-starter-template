@@ -1,0 +1,28 @@
+@use "../abstracts/" as *;
+
+@each $sizeName, $sizeValue in $sizes {
+  .gap-#{$sizeName} {
+    gap: $sizeValue;
+  }
+  .row-gap-#{$sizeName} {
+    row-gap: $sizeValue;
+  }
+  .col-gap-#{$sizeName} {
+    column-gap: $sizeValue;
+  }
+  .margin-#{$sizeName} {
+    margin: $sizeValue;
+  }
+  .padding-block-#{$sizeName} {
+    padding-block: $sizeValue;
+  }
+}
+
+.region,
+.section {
+  padding-block: $section-padding-block;
+}
+
+.mx-auto {
+  margin-inline: auto;
+}

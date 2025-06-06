@@ -1,0 +1,8 @@
+@use "../abstracts/" as *;
+
+//Todo - Da sistemare
+.grid-auto-fit {
+  display: grid;
+  grid-gap: $grid-gap;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px), 1fr));
+}

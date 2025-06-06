@@ -1,0 +1,16 @@
+/// NOTE: Assicurati che il parent abbia position: relative
+
+.one-side-bleed {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.one-side-bleed[data-side="start"] {
+  margin-right: 50%;
+}
+
+.one-side-bleed[data-side="end"] {
+  margin-left: 50%;
+}

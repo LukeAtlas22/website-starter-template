@@ -1,0 +1,11 @@
+@use "../abstracts/" as *;
+
+@each $breakpoint, $breakpointMap in $font-sizes {
+  @if ($breakpoint == small) {
+    @each $fsValue, $fsSize in $breakpointMap {
+      .fs-#{$fsValue} {
+        font-size: var(--fs-#{$fsValue});
+      }
+    }
+  }
+}

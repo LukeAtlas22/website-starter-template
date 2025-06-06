@@ -1,0 +1,26 @@
+@use "../abstracts/" as *;
+@use "sass:map";
+
+:root {
+  // Loop to generate colors custom property
+  @each $color, $shade-map in $colors {
+    @each $shade, $value in $shade-map {
+      --#{$color}-#{$shade}: #{$value};
+    }
+  }
+
+  // Loop to generate font sizes custom property
+  @each $breakpoint, $breakpointMap in $font-sizes {
+    @if ($breakpoint == getFirstBreakpoint($breakpoints)) {
+      @each $fsValue, $fsSize in $breakpointMap {
+        --fs-#{$fsValue}: #{$fsSize};
+      }
+    } @else {
+      @include mq(min, width, map.get($breakpoints, $breakpoint)) {
+        @each $fsValue, $fsSize in $breakpointMap {
+          --fs-#{$fsValue}: #{$fsSize};
+        }
+      }
+    }
+  }
+}

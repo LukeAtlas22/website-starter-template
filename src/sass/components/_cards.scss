@@ -1,0 +1,25 @@
+@use "../abstracts/tokens" as *;
+
+.card {
+  display: grid;
+  gap: $card-flow-spacing;
+  padding: $card-body-padding;
+  font-family: $card-font-family;
+  font-size: $card-font-size;
+  line-height: $card-line-height;
+  background-color: $card-background-default;
+  color: $card-color-default;
+  border-radius: $card-border-radius;
+  box-shadow: $card-box-shadow;
+  text-align: $card-text-align;
+
+  &__title {
+    font-family: $card-heading-font-family;
+    font-size: $card-heading-font-size;
+    font-weight: $card-heading-font-weight;
+    color: $card-heading-color-default;
+    letter-spacing: $card-heading-letter-spacing;
+    line-height: $card-heading-line-height;
+    text-transform: $card-heading-text-transform;
+  }
+}

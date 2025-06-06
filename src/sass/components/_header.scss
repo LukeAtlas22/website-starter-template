@@ -1,0 +1,21 @@
+@use "../abstracts/" as *;
+
+.header {
+  padding-block: $header-block-padding;
+  font-family: $header-font-family;
+  font-weight: $header-font-weight;
+  text-transform: $header-text-transform;
+  letter-spacing: $header-letter-spacing;
+  background-color: $header-background-color;
+  color: $header-color;
+
+  &__list {
+    gap: $header-list-gap;
+  }
+
+  &__list-item {
+    padding: $header-list-padding;
+    font-weight: $header-list-font-weight;
+    color: $header-list-color;
+  }
+}

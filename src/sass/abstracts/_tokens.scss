@@ -1,0 +1,172 @@
+@use "colors" as *;
+@use "sizes" as *;
+@use "typography" as *;
+
+// ====================================== //
+// ▄▀▀ ▄▀▄ █▄ █ ▀█▀ ██▀ ▀▄▀ ▀█▀ █ █ ▄▀▄ █
+// ▀▄▄ ▀▄▀ █ ▀█  █  █▄▄ █ █  █  ▀▄█ █▀█ █▄▄
+// ====================================== //
+
+// Colors
+$color-text-default: $color-primary-700;
+$color-background-default: $color-primary-100;
+$color-text-interactive-default: $color-accent-400;
+$color-text-interactive-hover: $color-accent-500;
+
+// Letter spacing
+$letter-spacing-loose: 0.16em;
+
+// Body
+$body-font-family: $font-family-base;
+$body-font-size: $font-size-400;
+$body-line-height: 1.5;
+$body-font-weight: $font-weight-default;
+$body-text-color: $color-text-default;
+$body-background-color: $color-background-default;
+
+// General
+$link-color: $color-text-interactive-default;
+$link-color-hover: $color-text-interactive-hover;
+
+// Layout
+$grid-gap: $size-8;
+$flex-group-gap: $size-4;
+
+$hero-padding-block: clamp(15rem, 15vh, 20rem);
+$section-padding-block: clamp($size-12, 10vh, $size-13);
+
+$card-body-padding: clamp($size-8, 3.5vw, $size-12);
+
+$container-min-margin-inline: $size-4;
+$container-max-width: 60rem;
+$container-max-width-narrow: 40rem;
+$container-max-width-wide: 75rem;
+
+// Border-radius
+$border-radius-1: $size-2;
+$border-radius-2: $size-4;
+
+// Shadows
+$box-shadow-1: 0 $size-1 $size-4 rgb(0 0 0 / 0.05);
+$box-shadow-2: 0 $size-1 $size-4 rgb(0 0 0 / 0.15);
+
+// ========================================= //
+// ▄▀▀ ▄▀▄ █▄ ▄█ █▀▄ ▄▀▄ █▄ █ ██▀ █▄ █ ▀█▀ ▄▀▀
+// ▀▄▄ ▀▄▀ █ ▀ █ █▀  ▀▄▀ █ ▀█ █▄▄ █ ▀█  █  ▄█▀
+// ========================================= //
+
+// Headings (Titles)
+$heading-font-family: $font-family-accent;
+$heading-font-size-default: $font-size-600;
+$heading-font-weight: $font-weight-bold;
+$heading-color-default: $body-text-color;
+$heading-letter-spacing: $letter-spacing-loose;
+$heading-line-height: 1;
+$heading-text-transform: uppercase;
+
+// Buttons
+$button-font-family: $body-font-family;
+$button-font-weight: $font-weight-bold;
+$button-font-size: $font-size-600;
+$button-text-transform: none;
+$button-padding-default: 0.75em 2em;
+$button-padding-default-coarse: 0.85em 2em;
+$button-border: none;
+$button-border-radius: $border-radius-1;
+$button-letter-spacing: 0;
+$button-transition: 275ms ease;
+
+$button-accent-color: $color-neutral-100;
+$button-accent-background: $color-accent-400;
+$button-accent-color-hover: $color-neutral-100;
+$button-accent-background-hover: $color-accent-500;
+
+$button-primary-color: $color-neutral-100;
+$button-primary-background: $color-primary-700;
+$button-primary-color-hover: $color-neutral-100;
+$button-primary-background-hover: $color-primary-800;
+
+// Cards
+$card-flow-spacing: $size-3;
+$card-body-padding: $size-8;
+$card-font-family: $body-font-family;
+$card-font-size: $body-font-size;
+$card-line-height: 1.25;
+$card-text-align: center;
+$card-background-default: $body-background-color;
+$card-color-default: $color-primary-800;
+$card-border-radius: $border-radius-2;
+$card-box-shadow: $box-shadow-1;
+
+$card-heading-font-family: $heading-font-family;
+$card-heading-font-size: $heading-font-size-default;
+$card-heading-font-weight: $heading-font-weight;
+$card-heading-color-default: $heading-color-default;
+$card-heading-letter-spacing: $heading-letter-spacing;
+$card-heading-line-height: $heading-line-height;
+$card-heading-text-transform: $heading-text-transform;
+
+$card-link-font-family: $card-font-family;
+$card-link-font-size: $card-font-size;
+$card-link-font-weight: $font-weight-bold;
+$card-link-color: $card-color-default;
+$card-link-letter-spacing: 1;
+$card-link-text-transform: none;
+
+// Header
+$header-font-family: $font-family-accent;
+$header-letter-spacing: $letter-spacing-loose;
+$header-font-weight: $font-weight-default;
+$header-text-transform: uppercase;
+$header-background-color: $color-primary-800;
+$header-block-padding: $size-8;
+$header-color: $color-primary-100;
+
+$header-list-gap: $flex-group-gap;
+
+$header-list-padding: $size-6 $size-3;
+$header-list-font-weight: $font-weight-bold;
+$header-list-color: $header-color;
+
+// Footer
+$footer-font-family: $font-family-accent;
+$footer-letter-spacing: $letter-spacing-loose;
+$footer-font-weight: $font-weight-default;
+$footer-text-transform: uppercase;
+$footer-background-color: $color-primary-800;
+$footer-block-padding: $size-8;
+$footer-color: $color-primary-100;
+
+$footer-list-gap: $flex-group-gap;
+
+$footer-list-padding: $size-6 $size-3;
+$footer-list-font-weight: $font-weight-bold;
+$footer-list-color: $header-color;
+
+//Form
+$form-col-spacing: $size-6; // Spazio verticale tra campi
+$form-row-spacing: $size-3; // Spazio orizzontale tra campi
+$form-group-spacing: $size-1; // Spazio tra label e input
+$form-label-button-margin-top: $size-5;
+
+$form-label-font-family: $body-font-family;
+$form-label-font-size: $font-size-400;
+$form-label-font-weight: $font-weight-bold;
+$form-label-color: $color-primary-700;
+
+$form-input-font-family: $body-font-family;
+$form-input-font-size: $font-size-400;
+$form-input-font-weight: $font-weight-semi-bold;
+$form-input-color: $color-primary-700;
+$form-input-border-radius: $border-radius-1;
+$form-input-border-default: 3px solid $color-primary-200;
+$form-input-border-hover: 3px solid $color-primary-300;
+$form-input-border-focus: 3px solid $color-primary-400;
+$form-input-background: $color-neutral-100;
+$form-input-padding: $size-3;
+$form-input-transition: 275ms ease;
+
+$form-placeholder-color: $color-primary-300;
+$form-placeholder-font-family: $body-font-family;
+$form-placeholder-font-size: $font-size-400;
+$form-placeholder-font-weight: $font-weight-semi-bold;

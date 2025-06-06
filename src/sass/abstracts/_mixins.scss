@@ -1,0 +1,54 @@
+@use "sass:math";
+@use "sass:meta";
+@use "sass:map";
+@use "breakpoints" as *;
+@use "tokens" as *;
+
+@mixin mq($type, $size, $breakpoint) {
+  @if ($type != min and $type != max) {
+    @error "Type not allowed";
+  }
+  @if ($size != width and $size != height) {
+    @error "Size not allowed";
+  }
+
+  @if (
+    not(map.has-key($breakpoints, $breakpoint)) and
+      (meta.type-of($breakpoint) != number)
+  ) {
+    @error "Breakpoint is not in the map";
+  }
+
+  @if (meta.type-of($breakpoint) == number and math.is-unitless($breakpoint)) {
+    @error "Breakpoint has no unit";
+  }
+
+  @if (meta.type-of($breakpoint) == number) {
+    $breakpoint: $breakpoint;
+  }
+
+  @if (meta.type-of($breakpoint) == string) {
+    $breakpoint: map.get($breakpoints, $breakpoint);
+  }
+
+  @media screen and (#{$type}-#{$size}: $breakpoint) {
+    @content;
+  }
+}
+
+// ===============
+// H e a d i n g s
+// ===============
+@mixin heading(
+  $fs: $heading-font-size-default,
+  $color: $heading-color-default
+) {
+  font-size: $fs;
+  color: $color;
+
+  font-family: $heading-font-family;
+  text-transform: $heading-text-transform;
+  letter-spacing: $heading-letter-spacing;
+  font-weight: $heading-font-weight;
+  line-height: $heading-line-height;
+}
