@@ -52,3 +52,12 @@
   font-weight: $heading-font-weight;
   line-height: $heading-line-height;
 }
+
+// =====================
+// F l e x - C e n t e r
+// =====================
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
