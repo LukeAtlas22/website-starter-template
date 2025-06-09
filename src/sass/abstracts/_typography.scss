@@ -31,10 +31,10 @@ $font-size-700: var(--fs-700);
 $font-size-800: var(--fs-800);
 $font-size-900: var(--fs-900);
 
-$-fw-400: 400;
-$-fw-500: 500;
-$-fw-700: 700;
+$-fw-400: 400; // Regular
+$-fw-500: 500; //
+$-fw-700: 700; // Bold
 
 $font-weight-default: $-fw-400;
-$font-weight-semi-bold: $-fw-500;
+$font-weight-semi-bold: $-fw-500 or $-fw-400;
 $font-weight-bold: $-fw-700;
