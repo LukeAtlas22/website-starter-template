@@ -1,14 +1,9 @@
 *,
-*::after,
-*::before {
+*::before,
+*::after {
   box-sizing: border-box;
+  padding: 0;
   margin: 0;
-}
-
-ul,
-ol,
-dd {
-  list-style: none;
 }
 
 a {
@@ -16,6 +11,35 @@ a {
   text-decoration: none;
 }
 
-input {
-  outline: transparent;
+img,
+picture,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+}
+
+:where(:focus-visible) {
+  outline: 2px solid goldenrod;
+  outline-offset: 2px;
 }

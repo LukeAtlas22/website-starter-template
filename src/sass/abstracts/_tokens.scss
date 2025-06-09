@@ -15,6 +15,7 @@ $color-text-interactive-hover: $color-accent-500;
 
 // Letter spacing
 $letter-spacing-loose: 0.16em;
+$letter-spacing-default: 0;
 
 // Body
 $body-font-family: $font-family-base;
@@ -60,7 +61,7 @@ $heading-font-family: $font-family-accent;
 $heading-font-size-default: $font-size-600;
 $heading-font-weight: $font-weight-bold;
 $heading-color-default: $body-text-color;
-$heading-letter-spacing: $letter-spacing-loose;
+$heading-letter-spacing: $letter-spacing-default;
 $heading-line-height: 1;
 $heading-text-transform: uppercase;
 
