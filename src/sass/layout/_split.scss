@@ -1,0 +1,36 @@
+@use "../abstracts/" as *;
+
+.splitter {
+  display: flex;
+  flex-direction: column;
+  gap: $grid-gap;
+
+  --first: attr(first type(#{"<percentage>"}), 100%);
+  --second: attr(second type(#{"<percentage>"}), 100%);
+
+  @include mq(min, width, medium) {
+    flex-direction: row;
+    align-items: center;
+
+    & :nth-child(1) {
+      flex-basis: var(--first);
+    }
+
+    & :nth-child(2) {
+      flex-basis: var(--second);
+    }
+  }
+}
+
+/**
+============================================================================
+    <div class="container">
+      <div class="splitter | row-gap-6 | col-gap-1" first="30%" second="70%">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
+    Usare sempre percentuali che sommate fanno 100
+============================================================================
+**/

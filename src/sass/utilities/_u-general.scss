@@ -9,6 +9,10 @@
   text-transform: uppercase;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .bold {
   font-weight: $font-weight-bold;
 }
@@ -19,4 +23,8 @@
 
 .letter-spacing-loose {
   letter-spacing: $letter-spacing-loose;
+}
+
+.vertically-center {
+  align-items: center;
 }
