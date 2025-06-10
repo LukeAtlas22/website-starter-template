@@ -115,19 +115,22 @@ $card-link-letter-spacing: 1;
 $card-link-text-transform: none;
 
 // Header
-$header-font-family: $font-family-accent;
-$header-letter-spacing: $letter-spacing-loose;
+$header-block-padding: $size-6 $size-6;
+$header-font-family: $body-font-family;
+$header-font-size: $font-size-500;
 $header-font-weight: $font-weight-default;
-$header-text-transform: uppercase;
-$header-background-color: $color-primary-800;
-$header-block-padding: $size-8;
-$header-color: $color-primary-100;
+$header-letter-spacing: 0;
+$header-text-transform: none;
+$header-background-color: transparent;
+$header-color: $color-neutral-900;
 
-$header-list-gap: $flex-group-gap;
-
-$header-list-padding: $size-6 $size-3;
-$header-list-font-weight: $font-weight-bold;
-$header-list-color: $header-color;
+// Navigation primary
+$navigation-font-family: $header-font-family;
+$navigation-font-size: $header-font-size;
+$navigation-font-weight: $header-font-weight;
+$navigation-color: $header-color;
+$navigation-background-color: $header-background-color;
+$navigation-link-padding: 0;
 
 // Footer
 $footer-font-family: $font-family-accent;

@@ -1,0 +1,37 @@
+@use "../abstracts/" as *;
+@use "../layout" as *;
+
+.nav-primary {
+  font-family: $navigation-font-family;
+  font-size: $navigation-font-size;
+  background-color: $navigation-background-color;
+  color: $navigation-color;
+
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 100%;
+  gap: $grid-gap;
+
+  &__toggle-button {
+    display: block;
+  }
+
+  a {
+    padding: $navigation-link-padding;
+    color: inherit;
+    font-family: inherit;
+  }
+}
+
+@include mq(min, width, medium) {
+  .nav-primary {
+    position: static;
+    display: flex;
+    flex-direction: row;
+
+    &__toggle-button {
+      display: none;
+    }
+  }
+}
