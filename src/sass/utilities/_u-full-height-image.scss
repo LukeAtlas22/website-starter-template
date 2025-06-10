@@ -1,6 +1,9 @@
 @use "../abstracts/" as *;
 
-.full-height-image {
+/// Escape block padding and set an optional top-offset or bot-offset
+
+.full-height-image,
+.escape-block-padding {
   &[data-position="right"] {
     margin-bottom: calc($section-padding-block * -1);
   }
