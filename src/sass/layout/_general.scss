@@ -8,9 +8,12 @@
 
 .flex-group {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: $flex-group-gap;
+}
+
+.wrap {
+  flex-wrap: wrap;
 }
 
 .flow {

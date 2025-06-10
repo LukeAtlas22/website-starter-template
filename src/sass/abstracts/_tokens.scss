@@ -122,7 +122,7 @@ $header-font-weight: $font-weight-default;
 $header-letter-spacing: 0;
 $header-text-transform: none;
 $header-background-color: transparent;
-$header-color: $color-neutral-900;
+$header-color: inherit;
 
 // Navigation primary
 $navigation-font-family: $header-font-family;

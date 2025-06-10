@@ -2,7 +2,10 @@
 
 //Todo - Da sistemare
 .grid-auto-fit {
+  --minimum: attr(min type(<length>), 200px);
+
   display: grid;
   grid-gap: $grid-gap;
-  grid-template-columns: repeat(auto-fit, minmax(min(200px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--minimum)), 1fr));
+  align-items: center;
 }
