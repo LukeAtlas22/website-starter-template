@@ -1,0 +1,5 @@
+@use "../abstracts/" as *;
+.bg-invert {
+  background-color: $color-text-default;
+  color: $color-background-default;
+}

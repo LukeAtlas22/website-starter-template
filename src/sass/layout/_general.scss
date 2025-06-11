@@ -21,10 +21,10 @@
   gap: $grid-gap;
 }
 
-.relative {
-  position: relative;
-}
-
 section {
+  padding-block: $section-padding-block;
+}
+.region,
+.section {
   padding-block: $section-padding-block;
 }

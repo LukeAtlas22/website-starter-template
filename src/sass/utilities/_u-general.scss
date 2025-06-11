@@ -28,3 +28,38 @@
 .vertically-center {
   align-items: center;
 }
+
+.relative {
+  position: relative;
+}
+
+.mx-auto {
+  margin-inline: auto;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Self Justification & Self Alignment
+
+.justify-self-end {
+  justify-self: end;
+}
+.justify-self-start {
+  justify-self: start;
+}
+.justify-self-center {
+  justify-self: center;
+}
+.align-self-end {
+  align-self: end;
+}
+.align-self-start {
+  align-self: start;
+}
+.align-self-center {
+  align-self: center;
+}

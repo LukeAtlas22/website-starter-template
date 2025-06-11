@@ -1,11 +1,56 @@
 @use "../abstracts/" as *;
 
-//Todo - Da sistemare
 .grid-auto-fit {
   --minimum: attr(min type(<length>), 200px);
+  --minimum-s: attr(min-small type(<length>), var(--minimum));
+  --minimum-m: attr(min-medium type(<length>), var(--minimum));
+
+  --min: var(--minimum-s);
+  @include mq(min, width, small) {
+    --min: var(--minimum-m);
+  }
+  @include mq(min, width, medium) {
+    --min: var(--minimum);
+  }
 
   display: grid;
-  grid-gap: $grid-gap;
-  grid-template-columns: repeat(auto-fit, minmax(min(var(--minimum)), 1fr));
   align-items: center;
+  grid-gap: $grid-gap;
+
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--min)), 1fr));
+}
+
+@layer modificators {
+  //! Override internal molecules / atoms width
+  .grid-auto-fit:is(.override-w, .override) {
+    > div {
+      width: 100% !important ;
+      max-width: var(--min) !important;
+    }
+  }
+
+  .grid-auto-fit:is(.justify-center) {
+    justify-items: center;
+    justify-content: center;
+  }
+  .grid-auto-fit:is(.justify-start) {
+    justify-items: start;
+    justify-content: start;
+  }
+  .grid-auto-fit:is(.justify-end) {
+    justify-items: end;
+    justify-content: end;
+  }
+  .grid-auto-fit:is(.align-center) {
+    align-items: center;
+    align-content: center;
+  }
+  .grid-auto-fit:is(.align-start) {
+    align-items: start;
+    align-content: start;
+  }
+  .grid-auto-fit:is(.align-end) {
+    align-items: end;
+    align-content: end;
+  }
 }

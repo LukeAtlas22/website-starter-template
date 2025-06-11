@@ -1,0 +1,76 @@
+@use "../abstracts/" as *;
+
+// =====================
+// Sizes utilities
+// =====================
+@each $sizeName, $sizeValue in $sizes {
+  .gap-#{$sizeName} {
+    gap: $sizeValue;
+  }
+  .row-gap-#{$sizeName} {
+    row-gap: $sizeValue;
+  }
+  .col-gap-#{$sizeName} {
+    column-gap: $sizeValue;
+  }
+  .margin-#{$sizeName} {
+    margin: $sizeValue;
+  }
+  .padding-block-#{$sizeName} {
+    padding-block: $sizeValue;
+  }
+}
+
+// =====================
+// Fluid sizes utilities
+// =====================
+@each $sizeName, $sizeValue in $sizes-fluid {
+  .gap-fluid-#{$sizeName} {
+    gap: $sizeValue;
+  }
+  .row-gap-fluid-#{$sizeName} {
+    row-gap: $sizeValue;
+  }
+  .col-gap-fluid-#{$sizeName} {
+    column-gap: $sizeValue;
+  }
+  .margin-fluid-#{$sizeName} {
+    margin: $sizeValue;
+  }
+  .padding-block-fluid-#{$sizeName} {
+    padding-block: $sizeValue;
+  }
+}
+
+// ======================================
+// Sizes utilities - BREAKPOINTS RELATIVE
+// ======================================
+@each $breakpointName, $breakpointValue in $breakpoints {
+  @each $sizeName, $sizeValue in $sizes {
+    .gap-#{$sizeName}#{":"}#{$breakpointName} {
+      @include mq(min, width, #{$breakpointName}) {
+        gap: $sizeValue;
+      }
+    }
+    .row-gap-#{$sizeName}#{":"}#{$breakpointName} {
+      @include mq(min, width, #{$breakpointName}) {
+        row-gap: $sizeValue;
+      }
+    }
+    .col-gap-#{$sizeName}#{":"}#{$breakpointName} {
+      @include mq(min, width, #{$breakpointName}) {
+        column-gap: $sizeValue;
+      }
+    }
+    .margin-#{$sizeName}#{":"}#{$breakpointName} {
+      @include mq(min, width, #{$breakpointName}) {
+        margin: $sizeValue;
+      }
+    }
+    .padding-block-#{$sizeName}#{":"}#{$breakpointName} {
+      @include mq(min, width, #{$breakpointName}) {
+        padding-block: $sizeValue;
+      }
+    }
+  }
+}

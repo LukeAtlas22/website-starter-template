@@ -1,0 +1,16 @@
+$sizes-fluid: (
+  1: clamp(1.125rem, 5vw, 2.625rem),
+  2: clamp(2.625rem, 12vw, 5.625rem),
+);
+
+$size-fluid-1: clamp(1.125rem, 5vw, 2.625rem);
+$size-fluid-2: clamp(2.625rem, 12vw, 5.625rem);
+
+// Genera una serie di utility classes come
+/*
+    .row-gap-fluid-1
+    .col-gap-fluid-1
+    .gap-fluid-1
+
+    ...ecc
+*/
