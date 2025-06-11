@@ -1,16 +1,20 @@
 @use "../abstracts/" as *;
 
+// Todo - Rendere override, override di default?
+/// Docs: Utilizzare --grid-items-size e un CLAMP per definire la dimensione degli elementi della griglia
 .grid-auto-fit {
-  --minimum: attr(min type(<length>), 200px);
-  --minimum-s: attr(min-small type(<length>), var(--minimum));
-  --minimum-m: attr(min-medium type(<length>), var(--minimum));
+  --grid-items-size: attr(min type(<length>), 200px);
+  //prettier-ignore
+  --grid-items-size-small: attr(min-small type(<length>), var(--grid-items-size));
+  //prettier-ignore
+  --grid-items-size-medium: attr(min-medium type(<length>), var(--grid-items-size));
 
-  --min: var(--minimum-s);
+  --min: var(--grid-items-size-small);
   @include mq(min, width, small) {
-    --min: var(--minimum-m);
+    --min: var(--grid-items-size-medium);
   }
   @include mq(min, width, medium) {
-    --min: var(--minimum);
+    --min: var(--grid-items-size);
   }
 
   display: grid;
