@@ -47,27 +47,27 @@
 // ======================================
 @each $breakpointName, $breakpointValue in $breakpoints {
   @each $sizeName, $sizeValue in $sizes {
-    .gap-#{$sizeName}#{":"}#{$breakpointName} {
+    .gap-#{$sizeName}-#{$breakpointName} {
       @include mq(min, width, #{$breakpointName}) {
         gap: $sizeValue;
       }
     }
-    .row-gap-#{$sizeName}#{":"}#{$breakpointName} {
+    .row-gap-#{$sizeName}-#{$breakpointName} {
       @include mq(min, width, #{$breakpointName}) {
         row-gap: $sizeValue;
       }
     }
-    .col-gap-#{$sizeName}#{":"}#{$breakpointName} {
+    .col-gap-#{$sizeName}-#{$breakpointName} {
       @include mq(min, width, #{$breakpointName}) {
         column-gap: $sizeValue;
       }
     }
-    .margin-#{$sizeName}#{":"}#{$breakpointName} {
+    .margin-#{$sizeName}-#{$breakpointName} {
       @include mq(min, width, #{$breakpointName}) {
         margin: $sizeValue;
       }
     }
-    .padding-block-#{$sizeName}#{":"}#{$breakpointName} {
+    .padding-block-#{$sizeName}-#{$breakpointName} {
       @include mq(min, width, #{$breakpointName}) {
         padding-block: $sizeValue;
       }
