@@ -1,0 +1,9 @@
+.fluid-sizer {
+  --min: attr(min type(<length>), 200px);
+  --max: attr(max type(<length>), 200px);
+  --variant: attr(variant type(<length>), 200px);
+
+  --fluid-size: clamp(var(--min), var(--variant), var(--max));
+
+  gap: var(--fluid-size);
+}
