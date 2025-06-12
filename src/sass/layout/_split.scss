@@ -1,24 +1,64 @@
 @use "../abstracts/" as *;
 
+/// Divide in due il contenuto, permettendoti di scegliere precisamente la dimensione (width) dei due div - Tramite l'attributo first e second
+/// Inoltre, ti permette di scegliere il breakpoint tramite modificator class (split-at-large,small,medium) al quale i due div si splittano - Default (cioè scrivere solo splitter) è medium.
 .splitter {
+  --flex-direction: column; // To use in style query
+
   display: flex;
-  flex-direction: column;
+  flex-direction: var(--flex-direction);
   gap: $grid-gap;
 
   --first: attr(first type(#{"<percentage>"}), 100%);
   --second: attr(second type(#{"<percentage>"}), 100%);
 
-  @include mq(min, width, medium) {
-    flex-direction: row;
-    align-items: center;
+  &:not(.split-at-large, .split-at-small) {
+    @include mq(min, width, medium) {
+      --flex-direction: row;
+      align-items: center;
 
-    & > div:nth-child(1) {
-      flex-basis: var(--first);
-    }
+      & > div:nth-child(1) {
+        flex-basis: var(--first);
+      }
 
-    & > div:nth-child(2) {
-      flex-basis: var(--second);
+      & > div:nth-child(2) {
+        flex-basis: var(--second);
+      }
     }
+  }
+
+  &:is(.split-at-large) {
+    @include mq(min, width, large) {
+      --flex-direction: row;
+      align-items: center;
+
+      & > div:nth-child(1) {
+        flex-basis: var(--first);
+      }
+
+      & > div:nth-child(2) {
+        flex-basis: var(--second);
+      }
+    }
+  }
+
+  &:is(.split-at-small) {
+    @include mq(min, width, large) {
+      --flex-direction: row;
+      align-items: center;
+
+      & > div:nth-child(1) {
+        flex-basis: var(--first);
+      }
+
+      & > div:nth-child(2) {
+        flex-basis: var(--second);
+      }
+    }
+  }
+
+  & {
+    container-type: inline-size;
   }
 }
 
@@ -34,3 +74,25 @@
     Usare sempre percentuali che sommate fanno 100
 ============================================================================
 **/
+
+@layer modificators {
+  //  =====================================================================
+  /// Inverte l'ordine di uno split soltanto quando flex-direction è COLUMN
+  /// Se i due div sono stackati (direction: row) l'ordine ritorna normale
+  //  =====================================================================
+  .splitter:is(.invert-order) {
+    & > div:nth-child(2) {
+      @container style(--flex-direction: row) {
+        order: -1;
+      }
+    }
+  }
+  //  =====================================================================
+  /// Inverte l'ordine di uno split permanentemente
+  //  =====================================================================
+  .splitter:is(.invert-order-always) {
+    & > div:nth-child(2) {
+      order: -1;
+    }
+  }
+}
