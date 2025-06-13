@@ -120,7 +120,7 @@ $header-font-family: $body-font-family;
 $header-font-size: $font-size-500;
 $header-font-weight: $font-weight-default;
 $header-letter-spacing: 0;
-$header-text-transform: none;
+$header-text-transform: inherit;
 $header-background-color: transparent;
 $header-color: inherit;
 
@@ -133,12 +133,13 @@ $navigation-background-color: $header-background-color;
 $navigation-link-padding: 0;
 
 // Footer
-$footer-font-family: $font-family-accent;
-$footer-letter-spacing: $letter-spacing-loose;
-$footer-font-weight: $font-weight-default;
-$footer-text-transform: uppercase;
-$footer-background-color: $color-primary-800;
 $footer-block-padding: $size-8;
+$footer-font-family: $font-family-accent;
+$footer-font-weight: $font-weight-default;
+$footer-font-size: $body-font-size;
+$footer-letter-spacing: $letter-spacing-loose;
+$footer-text-transform: inherit;
+$footer-background-color: transparent;
 $footer-color: $color-primary-100;
 
 $footer-list-gap: $flex-group-gap;

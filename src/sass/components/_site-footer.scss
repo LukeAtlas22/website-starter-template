@@ -1,0 +1,21 @@
+@use "../abstracts/" as *;
+
+.footer {
+  padding-block: $footer-block-padding;
+
+  font-family: $footer-font-family;
+  font-weight: $footer-font-weight;
+  font-size: $footer-font-size;
+  text-transform: $footer-text-transform;
+  letter-spacing: $footer-letter-spacing;
+  background-color: $footer-background-color;
+  color: $footer-color;
+
+  &__list {
+    display: flex;
+    gap: $footer-list-gap;
+    padding: $footer-list-padding;
+    font-weight: $footer-list-font-weight;
+    color: $footer-list-color;
+  }
+}
