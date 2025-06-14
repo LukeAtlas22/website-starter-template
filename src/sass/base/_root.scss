@@ -3,9 +3,18 @@
 
 :root {
   // Loop to generate colors custom property
-  @each $color, $shade-map in $colors {
+  @each $color, $shade-map in $active-theme {
     @each $shade, $value in $shade-map {
       --#{$color}-#{$shade}: #{$value};
+    }
+  }
+
+  // Overwrite to dark theme user preference
+  @media (prefers-color-scheme: dark) {
+    @each $color, $shade-map in $dark {
+      @each $shade, $value in $shade-map {
+        --#{$color}-#{$shade}: #{$value};
+      }
     }
   }
 

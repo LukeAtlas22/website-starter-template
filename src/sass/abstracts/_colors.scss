@@ -11,7 +11,7 @@ $-clr-brown-700: hsl(20 23% 23%);
 $-clr-brown-800: hsl(18 23% 10%);
 
 // Generate custom properties from globals tokens
-$colors: (
+$light: (
   neutral: (
     100: $-clr-white,
   ),
@@ -27,6 +27,24 @@ $colors: (
     400: $-clr-brown-400,
     700: $-clr-brown-700,
     800: $-clr-brown-800,
+  ),
+);
+
+$dark: (
+  "neutral": (
+    "100": $-clr-brown-800,
+  ),
+  "accent": (
+    "400": $-clr-orange-400,
+    "500": $-clr-orange-500,
+  ),
+  "primary": (
+    "100": $-clr-brown-800,
+    "200": $-clr-brown-700,
+    "300": $-clr-brown-400,
+    "400": $-clr-brown-300,
+    "700": $-clr-brown-200,
+    "800": $-clr-brown-100,
   ),
 );
 
