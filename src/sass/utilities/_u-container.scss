@@ -17,3 +17,9 @@
 .container[data-type="full-bleed"] {
   --max-width: 100%;
 }
+
+.cq,
+.c-query,
+.container-query {
+  container-type: inline-size;
+}

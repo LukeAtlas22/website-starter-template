@@ -1,0 +1,27 @@
+@use "../abstracts/" as *;
+
+.splitter-g {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $grid-gap;
+
+  & button {
+    justify-self: start;
+    align-self: center;
+  }
+}
+
+@layer modificators {
+  .splitter-g:is(.stretch-btns) {
+    & button {
+      justify-self: stretch;
+    }
+  }
+  .splitter-g:is(.invert) {
+    > div:nth-child(2) {
+      order: -1 !important;
+    }
+  }
+}
+
+@include body-center;

@@ -1,5 +1,7 @@
 @use "../abstracts/" as *;
 
+// Typography related
+
 .text-center {
   text-align: center;
   justify-content: center;
@@ -25,22 +27,14 @@
   letter-spacing: $letter-spacing-loose;
 }
 
+// Layout related
+
 .vertically-center {
   align-items: center;
 }
 
-.relative {
-  position: relative;
-}
-
 .mx-auto {
   margin-inline: auto;
-}
-
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 // Self Justification & Self Alignment
@@ -62,4 +56,9 @@
 }
 .align-self-center {
   align-self: center;
+}
+
+// Others
+.relative {
+  position: relative;
 }

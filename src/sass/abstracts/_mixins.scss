@@ -69,6 +69,19 @@
   translate: -50% -50%;
 }
 
+// ======================
+// P s e u d o - Elements
+// ======================
+@mixin pseudo {
+  content: "";
+  display: block;
+}
+@mixin pseudo-absolute {
+  content: "";
+  display: block;
+  position: absolute;
+}
+
 // =====================
 // U t i l i t y - D e v
 // =====================
