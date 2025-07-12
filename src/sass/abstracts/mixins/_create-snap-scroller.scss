@@ -1,0 +1,37 @@
+@mixin create-snap-scroller(
+  $direction: horizontal,
+  $scroll-snap-type: mandatory,
+  $scroll-snap-stop: always,
+  $scroll-snap-align: center,
+  $scrolling-items-selector: ".carousel__slide",
+  $scroll-behaviour: smooth,
+  $scrollbar: none
+) {
+  scroll-behavior: $scroll-behaviour;
+  scrollbar-width: $scrollbar;
+  display: flex;
+  @if ($direction == horizontal) {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  @if ($direction == vertical) {
+    flex-direction: column;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+  } @else if ($direction != horizontal and $direction != vertical) {
+    @error 'Wrong direction, chose between: horizontal | vertical';
+  }
+
+  // Applying properties to the child of the scroller
+  @if ($scroll-snap-stop == always) {
+    #{$scrolling-items-selector} {
+      scroll-snap-stop: always;
+    }
+  }
+  #{$scrolling-items-selector} {
+    scroll-snap-align: center;
+  }
+}
+
+//Todo: Error handling

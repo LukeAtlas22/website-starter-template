@@ -92,3 +92,7 @@
     place-items: center !important;
   }
 }
+
+@mixin debug {
+  outline: 2px solid red;
+}

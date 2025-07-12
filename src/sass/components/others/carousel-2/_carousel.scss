@@ -1,0 +1,66 @@
+@use "../../../abstracts/" as *;
+@use "tokens" as *;
+
+.carousel__wrapper {
+  margin-inline: auto;
+  width: $carousel-width;
+  height: $carousel-height;
+  gap: $carousel-gap-between-carousel-and-navigation;
+  display: grid;
+}
+
+.carousel__wrapper {
+  @if ($carousel-scroll-marker-group-position == before) {
+    @if ($carousel-scroll-marker-group-orientation == vertical) {
+      grid-template-columns: min-content 1fr;
+    }
+    @if ($carousel-scroll-marker-group-orientation == horizontal) {
+      grid-template-rows: min-content 1fr;
+    }
+  }
+
+  @if ($carousel-scroll-marker-group-position == after) {
+    @if ($carousel-scroll-marker-group-orientation == vertical) {
+      grid-template-columns: 1fr min-content;
+    }
+    @if ($carousel-scroll-marker-group-orientation == horizontal) {
+      grid-template-rows: 1fr min-content;
+    }
+  }
+}
+
+.carousel {
+  margin-inline: auto;
+  position: relative;
+  anchor-name: --carousel;
+  width: 100%;
+  height: 100%;
+  align-items: center; // Don't justify
+  gap: $carousel-slide-gap;
+
+  counter-reset: carousel-slide-counter 0; //Todo: create-counter mixin
+  @include create-snap-scroller(
+    $direction: $carousel-scroll-direction,
+    $scroll-snap-type: $carousel-scroll-snap-type,
+    $scroll-snap-stop: $carousel-scroll-snap-stop,
+    $scroll-snap-align: $carousel-scroll-snap-align,
+    $scrolling-items-selector: ".carousel__slide",
+    $scroll-behaviour: $carousel-scroll-behaviour,
+    $scrollbar: none
+  );
+}
+
+.carousel__anchor-scope {
+  anchor-scope: --carousel;
+}
+.carousel__container {
+  @include create-container($type: inline-size, $name: --carousel-container);
+}
+
+// #region Debug
+@if ($carousel-debug-mode-on == yes) {
+  .carousel {
+    @include debug;
+  }
+}
+// #endregion

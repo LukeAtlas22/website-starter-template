@@ -1,0 +1,39 @@
+.carousel__slide {
+  view-timeline-name: --carousel-slide-view-timeline;
+  view-timeline-axis: inline;
+}
+
+@mixin AnimateOver_CarouselSlideVisibility {
+  animation-timeline: --carousel-slide-view-timeline;
+  animation-range: cover 0% cover 100%;
+}
+
+.carousel__slide {
+  animation: reveal linear;
+  @include AnimateOver_CarouselSlideVisibility;
+}
+
+@keyframes colorizeDot {
+  from {
+  }
+  to {
+    background-color: red;
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    // Styles when it's crolling in
+  }
+
+  50% {
+    opacity: 1;
+    // Styles when fully visible
+  }
+
+  100% {
+    opacity: 0;
+    // Styles when is scrolling out
+  }
+}

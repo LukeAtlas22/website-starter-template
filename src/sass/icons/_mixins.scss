@@ -1,0 +1,142 @@
+@use "../abstracts/" as *;
+@use "function" as *;
+
+// #region setIcon
+/// It will use a ::after pseudo element to set an icon, (from a url reference), on another element.
+/// @param {url() function} $url - The icon CSS url() reference you want to set
+/// @param {CSS Selector (string)} $on - The element selector you want to set the icon, on - > Make sure that the element corresponding is a POSITIONED ELEMENT !! < - > Make sure you create a .icon-container element, inside the $on <
+/// @param {<color>} $color - The color of the icon
+/// @param {<length>} $inset - The inset of the icon
+/// @param {<length>} $stroke-width - The width of the stroke
+/// @param {<number>} $outline - The value of the outline, in number (This value will be used on stroke-width, on a clone element to make the outline)
+/// @param {<number>} $outline-offset - The offset of the outline, (also use a clone with the same color of the body)
+/// @param {<color>} $outline-color - The color of the outline
+/// @param {<length>} $rescale - This is a value to rescale the icon, if you can't make it work with inset, leave it to 1, only use if necessary.
+/// @output Nothing
+@mixin setIcon(
+  $url,
+  $on,
+  $color,
+  $inset,
+  $stroke-width,
+  $outline: 0,
+  $outline-offset: 0,
+  $outline-color: transparent,
+  $rescale: 1
+) {
+  //? Main icon shape, with color in background-image / background-color
+  #{$on} > .icon-container::after {
+    @include pseudo-absolute;
+    position: absolute;
+    inset: $inset;
+    background: $color;
+    mask-image: setStrokeWidthOnUrl($url, $stroke-width);
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    scale: 1;
+  }
+
+  //? BODY BG COLOR - Icon TRANSPARENT FILLER - It uses the $body-background-color, to give the desired space for an eventually outline offset
+  #{$on} > .icon-container::before {
+    @include pseudo-absolute;
+    inset: $inset;
+    background: $body-background-color;
+
+    //? Outline OFFSET generator with body color
+    mask-image: setStrokeWidthOnUrl($url, $stroke-width + $outline-offset);
+    // Todo => Logic -> If icon has only a stroke | If icon has a fill and stroke
+    mask-size: contain;
+    scale: 1;
+  }
+
+  //? OUTLINE - - Icon main outline give - It uses the icon outline offset in stroke-width - PLUS - the wanted width for the outline
+  #{$on} > .icon-container {
+    position: absolute;
+    inset: $inset;
+    background: $outline-color;
+
+    mask-image: setStrokeWidthOnUrl(
+      $url,
+      $stroke-width + $outline + $outline-offset
+    );
+    mask-composite: exclude;
+    // Todo => Logic -> If icon has only a stroke | If icon has a fill and stroke
+    mask-size: contain;
+    scale: $rescale;
+  }
+
+  //? This will be the icon shadow - It will use the $body-background-color to set the offset of the shadow, then, it will use the drop-shadow filter, to make the actual shadow.
+  #{$on} > .icon-shadow {
+  }
+}
+// #endregion
+
+// #region setIconOn
+/// It will use a ::after pseudo element to set an icon, (from a url reference), on another element.
+/// Make sure you use this mixin > INSIDE A SELECTOR < - And make sure that the element corresponding has a .icon-container Element
+/// @param {url() function} $url - The icon CSS url() reference you want to set
+/// @param {<color>} $color - The color of the icon
+/// @param {<length>} $inset - The inset of the icon
+/// @param {<length>} $stroke-width - The width of the stroke
+/// @param {<number>} $outline - The value of the outline, in number (This value will be used on stroke-width, on a clone element to make the outline)
+/// @param {<number>} $outline-offset - The offset of the outline, (also use a clone with the same color of the body)
+/// @param {<color>} $outline-color - The color of the outline
+/// @param {<length>} $rescale - This is a value to rescale the icon, if you can't make it work with inset, leave it to 1, only use if necessary.
+/// @output Nothing
+@mixin setIconOn(
+  $url,
+  $color,
+  $inset,
+  $stroke-width,
+  $outline: 0,
+  $outline-offset: 0,
+  $outline-color: transparent,
+  $rescale: 1
+) {
+  .icon-container,
+  .icon-container::after,
+  .icon-container::before {
+    mask-repeat: no-repeat;
+    mask-size: contain;
+    mask-position: 50%;
+  }
+
+  //? Main icon shape, with color in background-image / background-color
+  > .icon-container::after {
+    @include pseudo-absolute;
+    position: absolute;
+    inset: $inset;
+    background: $color;
+    mask-image: setStrokeWidthOnUrl($url, $stroke-width);
+  }
+
+  //? BODY BG COLOR - Icon TRANSPARENT FILLER - It uses the $body-background-color, to give the desired space for an eventually outline offset
+  > .icon-container::before {
+    @include pseudo-absolute;
+    inset: $inset;
+    background: $body-background-color;
+
+    //? Outline OFFSET generator with body color
+    mask-image: setStrokeWidthOnUrl($url, $stroke-width + $outline-offset);
+    // Todo => Logic -> If icon has only a stroke | If icon has a fill and stroke
+  }
+
+  //? OUTLINE - - Icon main outline give - It uses the icon outline offset in stroke-width - PLUS - the wanted width for the outline
+  > .icon-container {
+    position: absolute;
+    scale: $rescale;
+    inset: $inset;
+    background: $outline-color;
+
+    mask-image: setStrokeWidthOnUrl(
+      $url,
+      $stroke-width + $outline + $outline-offset
+    );
+    // Todo => Logic -> If icon has only a stroke | If icon has a fill and stroke
+  }
+
+  //? This will be the icon shadow - It will use the $body-background-color to set the offset of the shadow, then, it will use the drop-shadow filter, to make the actual shadow.
+  > .icon-shadow {
+  }
+}
+// #endregion

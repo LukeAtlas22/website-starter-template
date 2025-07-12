@@ -1,0 +1,5 @@
+@mixin Carousel-Slide-is-ScrollSnapChanged() {
+  .carousel__slide:is(.scroll-snap-changed) {
+    @content;
+  }
+}

@@ -1,0 +1,37 @@
+@use "../../../../abstracts/" as *;
+
+//! Make sure to not forward this in production
+
+.carousel:is(.debugging) .carousel__slide {
+  position: relative;
+}
+.carousel:is(.debugging) .carousel__slide::before {
+  @include pseudo-absolute;
+  content: "Active";
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+  outline: 1px solid black;
+  background-color: white;
+  color: black;
+  opacity: 50%;
+  padding: 0.25rem 0.5rem;
+  font-size: 1.2rem;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 375ms;
+}
+.carousel:is(.debugging) .carousel__slide.active::before {
+  opacity: 50%;
+}
+.carousel:is(.debugging) .carousel__link {
+  transition-duration: 275ms;
+}
+.carousel:is(.debugging) .carousel__link:is(.active) {
+  background-color: red;
+  scale: 1.025;
+}
+.carousel:is(.debugging) .carousel__link:is(:not(.active)) {
+  scale: 0.9;
+}

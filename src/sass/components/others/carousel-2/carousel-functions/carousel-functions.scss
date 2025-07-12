@@ -1,0 +1,9 @@
+@use "../tokens" as *;
+@function getAxis() {
+  @if ($carousel-scroll-direction == horizontal) {
+    @return x;
+  }
+  @if ($carousel-scroll-direction == vertical) {
+    @return y;
+  }
+}

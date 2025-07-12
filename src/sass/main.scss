@@ -1,10 +1,12 @@
 @use "base";
 @use "layout-macro";
 @use "layout";
-@use "layout";
 @use "components";
+@use "components/others/carousel-2";
 @use "pages";
+@use "icons";
 @use "themes";
 @use "utilities";
 
 // You might adjust the order from project to project !
+// Components may @extend layouts but they can't @extend utilities !

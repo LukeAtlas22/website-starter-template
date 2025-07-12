@@ -1,0 +1,45 @@
+@mixin BothButtons() {
+  .carousel__button--right,
+  .carousel__button--left,
+  .carousel::scroll-button(right),
+  .carousel::scroll-button(down),
+  .carousel::scroll-button(left),
+  .carousel::scroll-button(up) {
+    @content;
+  }
+  //! In attesa che i valori next e prev di scroll-button() diventino disponibili, utilizziamo questo meccanismo
+}
+
+@mixin NextButton() {
+  .carousel__button--right,
+  .carousel::scroll-button(right),
+  .carousel::scroll-button(down) {
+    @content;
+  }
+}
+
+@mixin PrevButton() {
+  .carousel__button--left,
+  .carousel::scroll-button(left),
+  .carousel::scroll-button(up) {
+    @content;
+  }
+}
+
+@mixin BothButtonsPseudo() {
+  .carousel::scroll-button(right),
+  .carousel::scroll-button(down),
+  .carousel::scroll-button(left),
+  .carousel::scroll-button(up) {
+    @content;
+  }
+}
+
+@mixin BothButtonsDOM() {
+  .carousel__button--right,
+  .carousel__button--left {
+    @content;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////

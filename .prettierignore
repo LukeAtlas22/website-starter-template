@@ -1,0 +1,6 @@
+src/sass/components/others/carousel-2/_tokens.scss
+src/sass/abstracts/_tokens.scss
+src/sass/components/others/carousel-2/_carousel-buttons.scss
+src/sass/components/others/carousel-2/_carousel-scroll-marker.scss
+
+src/sass/abstracts/mixins/_apply-declarations.scss

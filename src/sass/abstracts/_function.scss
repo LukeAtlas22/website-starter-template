@@ -13,3 +13,7 @@
 @function getFirstBreakpoint($map) {
   @return list.nth(map.keys($map), 1);
 }
+
+@function responsive-size($min, $size, $max) {
+  @return clamp($min, $size, $max);
+}

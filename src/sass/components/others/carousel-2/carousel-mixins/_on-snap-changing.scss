@@ -1,0 +1,16 @@
+@use "../tokens" as *;
+
+@mixin Carousel-Slide-is-ScrollSnapChanging() {
+  $direction: x;
+  @if ($carousel-scroll-direction == horizontal) {
+    $direction: x;
+  }
+  @if ($carousel-scroll-direction == vertical) {
+    $direction: y;
+  }
+  .carousel__slide {
+    @container --carousel-scroll-container scroll-state(snapped: #{$direction}) {
+      @content;
+    }
+  }
+}

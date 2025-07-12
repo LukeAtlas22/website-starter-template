@@ -8,13 +8,14 @@
 // ====================================== //
 
 // Active - Theme
-$active-theme: $light;
+$active-theme: $default;
+$active-theme-dark: $default-dark;
 
 // Colors
-$color-text-default: $color-primary-700;
-$color-background-default: $color-primary-100;
-$color-text-interactive-default: $color-accent-400;
-$color-text-interactive-hover: $color-accent-500;
+$color-text-default: light-dark($color-neutral-700, $color-neutral-300d);
+$color-background-default: light-dark($color-neutral-100, $color-neutral-900d);
+$color-text-interactive-default: initial;
+$color-text-interactive-hover: initial;
 
 // Letter spacing
 $letter-spacing-loose: 0.16em;
@@ -45,6 +46,10 @@ $container-min-margin-inline: $size-4;
 $container-max-width: 60rem;
 $container-max-width-narrow: 40rem;
 $container-max-width-wide: 75rem;
+
+// Icons
+$default-icons-width: 2rem;
+$default-icons-height: 2rem;
 
 // Border-radius
 $border-radius-1: $size-2;
@@ -81,14 +86,14 @@ $button-letter-spacing: 0;
 $button-transition: 275ms ease;
 
 $button-accent-color: $color-neutral-100;
-$button-accent-background: $color-accent-400;
+$button-accent-background: $color-primary-500;
 $button-accent-color-hover: $color-neutral-100;
-$button-accent-background-hover: $color-accent-500;
+$button-accent-background-hover: $color-primary-500;
 
-$button-primary-color: $color-neutral-100;
-$button-primary-background: $color-primary-700;
-$button-primary-color-hover: $color-neutral-100;
-$button-primary-background-hover: $color-primary-800;
+$button-primary-color: $color-neutral-900;
+$button-primary-background: $color-primary-400;
+$button-primary-color-hover: $color-neutral-900;
+$button-primary-background-hover: $color-primary-500;
 
 // Cards
 $card-flow-spacing: $size-3;
@@ -98,7 +103,7 @@ $card-font-size: $body-font-size;
 $card-line-height: 1.25;
 $card-text-align: center;
 $card-background-default: $body-background-color;
-$card-color-default: $color-primary-800;
+$card-color-default: $color-primary-500;
 $card-border-radius: $border-radius-2;
 $card-box-shadow: $box-shadow-1;
 
@@ -117,6 +122,9 @@ $card-link-color: $card-color-default;
 $card-link-letter-spacing: 1;
 $card-link-text-transform: none;
 
+$card-icons-width: $default-icons-width;
+$card-icons-height: $default-icons-height;
+
 // Header
 $header-block-padding: $size-6 $size-6;
 $header-font-family: $body-font-family;
@@ -126,6 +134,9 @@ $header-letter-spacing: 0;
 $header-text-transform: inherit;
 $header-background-color: transparent;
 $header-color: inherit;
+
+$header-icons-width: $default-icons-width;
+$header-icons-height: $default-icons-height;
 
 // Navigation primary
 $navigation-font-family: $header-font-family;
@@ -143,13 +154,16 @@ $footer-font-size: $body-font-size;
 $footer-letter-spacing: $letter-spacing-loose;
 $footer-text-transform: inherit;
 $footer-background-color: transparent;
-$footer-color: $color-primary-100;
+$footer-color: $color-neutral-900;
 
 $footer-list-gap: $flex-group-gap;
 
 $footer-list-padding: $size-6 $size-3;
 $footer-list-font-weight: $font-weight-bold;
 $footer-list-color: $header-color;
+
+$footer-icons-width: $default-icons-width;
+$footer-icons-height: $default-icons-height;
 
 //Form
 $form-col-spacing: $size-6; // Spazio verticale tra campi
@@ -160,21 +174,23 @@ $form-label-button-margin-top: $size-5;
 $form-label-font-family: $body-font-family;
 $form-label-font-size: $font-size-400;
 $form-label-font-weight: $font-weight-bold;
-$form-label-color: $color-primary-700;
+$form-label-color: $color-primary-400;
 
 $form-input-font-family: $body-font-family;
 $form-input-font-size: $font-size-400;
 $form-input-font-weight: $font-weight-semi-bold;
-$form-input-color: $color-primary-700;
+$form-input-color: $color-primary-400;
 $form-input-border-radius: $border-radius-1;
-$form-input-border-default: 3px solid $color-primary-200;
-$form-input-border-hover: 3px solid $color-primary-300;
-$form-input-border-focus: 3px solid $color-primary-400;
+$form-input-border-default: 3px solid $color-primary-400;
+$form-input-border-hover: 3px solid $color-primary-400;
+$form-input-border-focus: 3px solid $color-primary-500;
 $form-input-background: $color-neutral-100;
 $form-input-padding: $size-3;
 $form-input-transition: 275ms ease;
 
-$form-placeholder-color: $color-primary-300;
+$form-placeholder-color: $color-primary-400;
 $form-placeholder-font-family: $body-font-family;
 $form-placeholder-font-size: $font-size-400;
 $form-placeholder-font-weight: $font-weight-semi-bold;
+
+//! Need to do icons ma c'è qualcosa di strano in _form.scss

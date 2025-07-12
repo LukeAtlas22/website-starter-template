@@ -1,0 +1,79 @@
+$carousel-width: 70cqi; // 70% of the container inline
+$carousel-height: 50cqi; // 50% of the container inline size
+$carousel-min-width: 20rem;
+$carousel-min-height: 17.5rem;
+$carousel-max-width: 45rem;
+$carousel-max-height: 42.5rem;
+
+$carousel-gap: 3.25rem; //? Gap between frame and navigation
+$carousel-frame-divs-gap: 50%; //? => (50% Of the entire frame width)
+
+$carousel-navigation-justification: center; //? => Start || End || Center
+$carousel-navigation-order: -0; //? => -1 Before || 0 After
+$carousel-scroll-snap-stop-behaviour: always; //? => Always || Normal
+$carousel-orientation: "horizontal";
+
+// Buttons
+$inset-side-carousel: "to do"; //todo
+$inset-feet-carousel: clamp($carousel-min-width - 14rem, 10vw, 60%);
+
+$carousel-buttons-position: "inside navigation"; //? => inside navigation || side carousel || feet carousel || inside navigation
+$carousel-buttons-vertical-position: "align with navigation"; //? Values: 'align with navigation' || custom <length>
+$carousel-buttons-horizontal-offset: 2rem; //? In rem - Do not use percentages - Use negative values to distance buttons from the frame.
+
+$carousel-buttons-size-block: clamp(4.25rem, 12.75vw, 4.75rem);
+$carousel-buttons-size-inline: clamp(4.25rem, 12.75vw, 4.75rem);
+$carousel-buttons-border-radius: 200vw;
+$carousel-buttons-border: 2px solid red;
+$carousel-buttons-box-shadow: "";
+$carousel-buttons-color: "";
+$carousel-buttons-background: "";
+$carousel-buttons-opacity: "";
+$carousel-buttons-hover-color: "";
+$carousel-buttons-hover-background: "";
+$carousel-buttons-hover-opacity: "";
+$carousel-buttons-hover-rescale: "";
+$carousel-buttons-active-color: "";
+$carousel-buttons-active-background: "";
+$carousel-buttons-active-opacity: "";
+$carousel-buttons-active-rescale: "";
+$carousel-buttons-disabled-color: "";
+$carousel-buttons-disabled-background: "";
+$carousel-buttons-dusabled-opacity: "";
+$carousel-buttons-disabled-rescale: "";
+$carousel-buttons-transition: "";
+
+$carousel-buttons-arrow-icon-type: "type-1"; //? from type-1 to type-3
+$carousel-buttons-arrow-icon-inset: "";
+$carousel-buttons-arrow-icon-thickness: "";
+$carousel-buttons-arrow-icon-rescale: "";
+$carousel-buttons-arrow-icon-color: "";
+$carousel-buttons-arrow-icon-outline-width: "";
+$carousel-buttons-arrow-icon-outline-offset: "";
+$carousel-buttons-arrow-icon-outline-color: "";
+
+// ! I need something here that allows me to use the current design buttons...
+
+// Navigation
+
+// $navigation: 'yes | no';
+$navigation-justification: $carousel-navigation-justification;
+$navigation-size: 100%;
+$navigation-max-size: auto;
+$navigation-min-size: auto;
+$navigation-min-size-in-links-number: 3; //? Minimum number of links
+$navigation-max-size-in-links-number: 6; //? Maximum number of links to show
+// Todo: ^ Total Amount - Then show total amount of links
+$choose-navigation-min-max-size-by: "links-number"; //? "links-number" || "size-length"
+
+$navigation-block-padding: 0.5rem;
+$navigation-inline-padding: 0.5rem;
+$navigation-min-gap: 1.75rem;
+//todo navigation-max-gap
+
+$navigation-links-list-min-gap: 1rem;
+$navigation-links-list-max-gap: 1.5rem;
+$navigation-link-size: 36px;
+$navigation-link-border-radius: 100vw;
+
+$nav-links-amount: 12; // ! Dynamic

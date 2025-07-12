@@ -1,0 +1,27 @@
+//! >> Always store arrows pointing up <<
+//! >> Always store arrows pointing up <<
+//! >> fill e stroke, devono essere sempre black <<
+//! >> fill e stroke, devono essere sempre black <<
+
+// Make these privates
+$-svg-1: url('data:image/svg+xml,<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M12 6V18M12 6L7 11M12 6L17 11" stroke="black" stroke-width="" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>');
+// Preview:
+
+$-svg-2: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M17 15a1 1 0 0 0 .707-1.707l-5-5a1 1 0 0 0-1.414 0l-5 5A1 1 0 0 0 7 15h10Z" clip-rule="evenodd" stroke="black" stroke-width=""/></svg>');
+// Preview:
+
+$-svg-3: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="" d="m17 14l-5-5m0 0l-5 5"/></svg>');
+// Preview:
+
+$-svg-4: "";
+// Preview:
+
+$-svg-5: "";
+
+$arrow-icons-map: (
+  1: $-svg-1,
+  2: $-svg-2,
+  3: $-svg-3,
+  4: $-svg-4,
+  5: $-svg-5,
+);

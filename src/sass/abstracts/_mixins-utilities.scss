@@ -1,0 +1,4 @@
+@mixin create-container($type: inline-size, $name: --no-name-set) {
+  container-type: $type;
+  container-name: $name;
+}

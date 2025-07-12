@@ -1,0 +1,93 @@
+@use "sass:map";
+@use "sass:string";
+
+@function doesSubstringExist($in, $check) {
+  @if (string.index($in, $check) != null) {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+
+@function remove-substring($from, $remove) {
+  $result: $from;
+
+  @while string.index($result, $remove) {
+    $start: string.slice($result, 1, string.index($result, $remove) - 1);
+    $end: string.slice(
+      $result,
+      string.index($result, $remove) + string.length($remove)
+    );
+    $result: $start + $end;
+  }
+
+  @return $result;
+}
+
+@function push($map, $entry) {
+  @return map.merge($map, $entry);
+}
+
+///
+/// @param {CSS Selector} $on - The class on which you will set the declarations
+/// @param {SCSS Map} $from - The map where you will get the declarations
+/// @output
+@mixin apply-declarations($on, $from) {
+  $on-normal: ();
+  $on-hover: ();
+  $on-active: ();
+  $on-focus: ();
+  $on-focus-visible: ();
+  $on-target-current: ();
+
+  @each $property, $value in $from {
+    @if (doesSubstringExist($in: $property, $check: -hover)) {
+      $property: remove-substring($property, -hover);
+      $on-hover: push($map: $on-hover,$entry: ($property: $value),);
+    } @else if (doesSubstringExist($in: $property, $check: -active)) {
+      $property: remove-substring($property, -active);
+      $on-active: push($map: $on-active,$entry: ($property: $value),);
+    } @else if (doesSubstringExist($in: $property, $check: -focus)) {
+      $property: remove-substring($property, -focus);
+      $on-focus: push($map: $on-focus,$entry: ($property: $value),);
+    } @else if (doesSubstringExist($in: $property, $check: -visible)) {
+      $property: remove-substring($property, -visible);
+      $on-focus-visible: push($map: $on-focus-visible,$entry: ($property: $value),);
+    } @else if (doesSubstringExist($in: $property, $check: -target-current)) {
+      $property: remove-substring($property, -target-current);
+      $on-target-current: push($map: $on-active,$entry: ($property: $value),);
+    } @else {
+      $on-normal: push($map: $on-normal,$entry: ($property: $value),);
+    }
+  }
+
+  // Creo una nuova mappa che contiene tutte le mappe
+  $maps: (
+    normal: $on-normal,
+    hover: $on-hover,
+    active: $on-active,
+    focus: $on-focus,
+    focus-visible: $on-focus-visible,
+    target-current: $on-target-current,
+  );
+
+  // Per ogni mappa, creo un selettore e distribuisco le declarations.
+  // Per eliminare selettori vuoti affidarsi a un plugin.
+  @each $state, $map in $maps {
+    @if ($state != normal) {
+      #{$on}:is(:#{$state}) {
+        @each $property, $value in $map {
+          #{$property}: $value;
+        }
+      }
+    }
+    @if ($state == normal) {
+      #{$on} {
+        @each $property, $value in $map {
+          #{$property}: $value;
+        }
+      }
+    }
+  }
+}
+

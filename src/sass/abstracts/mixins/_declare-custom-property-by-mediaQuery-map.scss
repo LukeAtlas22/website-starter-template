@@ -1,0 +1,80 @@
+@use "../../abstracts/mixins" as *;
+//Todo forse si potrebbe cambiare nome file e fare un modulo dedicato a questa roba
+/// Da utilizzare all'interno di un selettore - Include una media query, per ogni media query presente nella mappa.
+/// All'interno di questa media query... dichiara una custom property, con valore ($values) corrispondente per ogni media query...
+///
+/// @example scss - SCSS:
+///   @include declare-customProperty-by-mediaQuery-map(
+///     mediaQuery-values-map:
+///       $carousel-buttons-position: (
+///         (min, width, 1000px): outside-carousel,
+///         (max, width, 1000px): feet-carousel,
+///         (max, width, 500px): inside-carousel,
+///         (max, width, 375px): display-none,
+///       );
+///     customProperty-to-change:
+///       --buttons-position;
+///   );
+///
+/// @example css - CSS:
+///   .selector {
+///     @media screen and (min-width: 1000px) {
+///       --buttons-position: outside-carousel;
+///     }
+///     @media screen and (max-width: 1000px) {
+///       --buttons-position: feet-carousel;
+///     }
+///     @media screen and (max-width: 500px) {
+///       --buttons-position: inside-carousel;
+///     }
+///     @media screen and (max-width: 375px) {
+///       --buttons-position: display-none;
+///     }
+///   }
+@mixin declare-customProperty-by-mediaQuery-map(
+  $mediaQuery-values-map,
+  $customProperty
+) {
+  @each $media-query, $values in $mediaQuery-values-map {
+    $type: nth($media-query, 1);
+    $size: nth($media-query, 2);
+    $breakpoint: nth($media-query, 3);
+    @include mq($type, $size, $breakpoint) {
+      #{$customProperty}: #{$values};
+    }
+  }
+}
+
+//Todo: Questo mixin dovrebbe avere un error handling particolare - Dovrebbe essere capace di gettare, in qualche modo, tutti i valori validi che possono essere passati alla custom property - Quindi ci deve essere una fase in cui si passano i valori a questa custom property
+
+// ADa utilizzare all'internodi un selettore - Include una media query, per ogni media query presente nella mappa. All'interno di questa media query... dichiara una custom property, con valore ($values) corrispondente per ogni media query...
+// SCSS:
+/*  @include declare-customProperty-by-mediaQuery-map(
+        mediaQuery-values-map:
+            $carousel-buttons-position: (
+            (min, width, 1000px): outside-carousel,
+            (max, width, 1000px): feet-carousel,
+            (max, width, 500px): inside-carousel,
+            (max, width, 375px): display-none,
+            );
+        customProperty-to-change:
+            --buttons-position;
+    );        
+*/
+// CSS:
+/*
+    .selector{
+        @media screen and (min-width: 1000px){
+            --buttons-position: outside-carousel;
+        }
+        @media screen and (max-width: 1000px){
+            --buttons-position: feet-carousel;
+        }
+        @media screen and (max-width: 500px){
+            --buttons-position: inside-carousel;
+        }
+        @media screen and (max-width: 375px){
+            --buttons-position: display-none;
+        }
+    }
+*/

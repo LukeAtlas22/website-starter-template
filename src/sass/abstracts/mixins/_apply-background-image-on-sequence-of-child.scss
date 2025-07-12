@@ -1,0 +1,34 @@
+// Test
+//! Qui dobbiamo tokenizzare tutto, fare in modo di poter scegliere di DARE LE IMMAGINI DELLE SLIDE AI MARKER
+// Potremmo anche modulare questo mixin e chiamato declare-background-images-on-elements-using-url-path
+@mixin apply-background-image-on-sequence-of-child(
+  //Todo: Fixing next
+  $childs-selector,
+  $childs-pseudo-element,
+  $childs-number,
+  $images-path,
+  $images-path-ending-divisor
+) {
+  @for $i from 1 through $childs-number {
+    #{$childs-selector}:nth-child(#{$i})#{$childs-pseudo-element} {
+      background-image: url("#{$images-path}#{$images-path-ending-divisor}#{$i}");
+    }
+  }
+}
+/*
+Cosa deve fare questo mixins?
+Questo mixins agisce sui marker del carosello
+Praticamente imposta, l'immagine della slide, come background image del marker.
+Utilizza $carousel-images-path, che è il path, sia esso la cartella, o l'url da cui viene ottenuta la lista di immagini all'interno delle varie slides.
+Per ognuno di questi path, assegna alla fine un - (trattino) e un (numero) - Questo numero corrisponde alla conta di tutte le $carousel-slides-number. Da uno, fino a tutte le slide.
+Quindi è importante che le immagini abbiano un aspetto del genere.
+/cartella/immagine-1
+/cartella/immagine-2
+/cartella/immagine-3
+E che a questa funzione sia passato solo /cartella/immagine come $carousel-images-path
+Oppure un altro esempio
+www.immagine-casouale/img-1
+www.immagine-casuale/img-2
+www.immagine-casuale/img-3
+E che a questa funzione sia passato solo www.immagine-casuale/img
+*/

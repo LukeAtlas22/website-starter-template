@@ -1,0 +1,30 @@
+@use "../abstracts/" as *;
+
+.icon {
+  width: $default-icons-width;
+  height: $default-icons-height;
+  @include flex-center;
+}
+
+$read-me: "The following is only for reference, everything is inside their component";
+@if ($read-me == "") {
+  .header {
+    .icon {
+      width: $header-icons-width;
+      height: $header-icons-height;
+    }
+  }
+  .footer {
+    .icon {
+      width: $footer-icons-width;
+      height: $footer-icons-height;
+    }
+  }
+
+  .card {
+    .icon {
+      width: $card-icons-width;
+      height: $card-icons-height;
+    }
+  }
+}

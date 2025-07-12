@@ -1,0 +1,29 @@
+@use "tokens" as *;
+@use "sass:map";
+
+.carousel {
+  scroll-marker-group: $carousel-scroll-marker-group-position;
+
+  // Self alignment & sizing
+  &::scroll-marker-group {
+    justify-self: $carousel-scroll-marker-group-self-justification;
+    align-self: $carousel-scroll-marker-group-self-alignment;
+    //prettier-ignore
+    block-size: map-get(map-get($carousel-scroll-marker-style, use-default), height);
+    inline-size: $carousel-scroll-marker-group-length;
+    writing-mode: $carousel-scroll-marker-group-orientation + -lr;
+  }
+
+  // Internal markers
+  &::scroll-marker-group {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-content: center;
+    overflow-y: visible;
+    gap: $carousel-scroll-marker-group-gap;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    // Qui posso fare una view transition che li scala appena entrano in view...
+  }
+}

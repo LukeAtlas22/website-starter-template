@@ -1,0 +1,150 @@
+@use "../../../abstracts/" as *;
+@use "tokens" as *;
+@use "carousel-functions/carousel-functions.scss" as Carousel;
+@use "carousel-mixins/on-snap-changed" as *;
+@use "carousel-mixins/on-snap-changing" as *;
+
+.carousel__slide {
+  @include create-container(
+    $type: scroll-state,
+    $name: --carousel-scroll-container
+  );
+
+  counter-increment: carousel-slide-counter 1;
+  position: relative;
+}
+
+.carousel__slide {
+  flex-shrink: 0;
+  width: $carousel-slide-width;
+  height: $carousel-slide-height;
+
+  &:first-child {
+    @if ($carousel-scroll-direction == horizontal) {
+      margin-inline-start: $carousel-slide-first-margin-start;
+    }
+    @if ($carousel-scroll-direction == vertical) {
+      margin-block-start: $carousel-slide-first-margin-start;
+    }
+  }
+  &:last-child {
+    @if ($carousel-scroll-direction == horizontal) {
+      margin-inline-end: $carousel-slide-last-margin-end;
+    }
+    @if ($carousel-scroll-direction == vertical) {
+      margin-block-end: $carousel-slide-last-margin-end;
+    }
+  }
+}
+
+// View timeline
+.carousel__slide {
+  view-timeline-axis: Carousel.getAxis();
+  view-timeline-name: --carousel-slide-view-timeline;
+}
+
+.carousel__slide {
+  animation: fade-in;
+  animation-fill-mode: forwards;
+  animation-timeline: --carousel-slide-view-timeline;
+  animation-range: cover 0% cover 117%;
+  opacity: 0;
+}
+
+@keyframes fade-in {
+  from {
+  }
+  50% {
+    opacity: 100%;
+  }
+  to {
+  }
+  //! Secondo me è sbagliato usare il trucchetto del 50%
+  //! Dovrei usare ciò che view timeline mette e disposizione
+  //! Questa cosa dovrebbe funzionare sia con il protipo 1 che con il prototipo 2
+}
+
+//! Siamo arrivati a un punto un po' complicato in cui dobbiamo decidere se questo carosello sarà poi possibile farlo diventare uno slider, un tv show slider, insomma, estenderlo anche a tipi molto diversi di caroselli, oppure lasciarlo così e magari creare altri components
+@mixin Carousel-Slide-on-ScrollViewTimeline() {
+  //? The animations inside this mixin, will base their timeline on the slides of the carousels.
+}
+
+//Todo: Spostare questi due mixins da un'altra parte, e magari anche gli include
+//Todo: Potrei fare un modulo... on snap changing e on snap changed non so...
+//Todo: Qualcosa legato alle query - Questo modulo dev'essere una sorta di tokenization
+//Todo: Però legata alle query
+/*
+  Ci sono tante cose che possono accadere all'interno di una slide 
+  Tanto stile e mi serve un modo per organizzare tutto lo stile, legato all'interno delle slide, che deve essere renderizzato soltanto in un preciso momento.
+  Quindi potrei creare un file a parte, dove l'utente va a scrivere i propri stili del proprio design, on scroll snap changing, on scroll snap changed, on scroll view timeline, eccetera...
+*/
+
+@include Carousel-Slide-is-ScrollSnapChanging() {
+  // Here goes the content when a scroll snap changing event is fired on a slide
+  // Here, you can only select things inside the slide.
+
+  //.carousel__slide:is(.scroll-snap-changing){
+
+  //}
+}
+
+@include Carousel-Slide-is-ScrollSnapChanged() {
+  // Here goes the content when a scroll snap change event fires on a slide
+  // Here, you can select only things inside the slide
+
+  //.carousel__slide:is(.scroll-snap-changed){
+
+  //}
+}
+
+// #region Debug mode
+//Todo Da spostare
+@if ($carousel-debug-mode-on == yes) {
+  .carousel__slide {
+    &::after {
+      //Debug
+      @include pseudo-absolute;
+      @include absolute-center;
+      @include flex-center;
+      content: counter(carousel-slide-counter);
+      font-size: 2.75rem;
+      font-family: arial;
+      outline: 1px solid black;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 200vw;
+      background: white;
+      color: black;
+      opacity: 50%;
+    }
+  }
+}
+@if ($carousel-debug-mode-on == yes) {
+  .carousel__slide {
+    > img {
+      display: none;
+    }
+  }
+  .carousel__slide:nth-child(1) {
+    background-color: red;
+  }
+  .carousel__slide:nth-child(2) {
+    background-color: red;
+  }
+  .carousel__slide:nth-child(3) {
+    background-color: red;
+  }
+  .carousel__slide:nth-child(4) {
+    background-color: red;
+  }
+  .carousel__slide:nth-child(5) {
+    background-color: red;
+  }
+  .carousel__slide:nth-child(6) {
+    background-color: red;
+  }
+  .carousel__slide:nth-child(7) {
+    background-color: red;
+  }
+}
+// #endregion

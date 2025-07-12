@@ -1,0 +1,78 @@
+@use "tokens" as this;
+
+.carousel__frame {
+  scroll-timeline-name: --carousel-frame-scroll-timeline;
+  scroll-timeline-axis: inline; //Todo (?) Tokenize carousel axis ?
+}
+
+.carousel {
+  timeline-scope: --carousel-frame-scroll-timeline;
+}
+
+// Todo: To move in _scroll-progress-bar
+// ! Can only be used with NOT Infinite Scroll Carousels
+// #region Scroll progress bar
+.carousel {
+  position: relative;
+}
+
+.carousel__scroll-progress-bar {
+  //Todo: change in "progress"
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  height: 1.25rem;
+  background-color: green;
+  z-index: 1;
+
+  animation: testProgressBar forwards;
+  animation-timeline: --carousel-frame-scroll-timeline;
+  animation-range: 0% 100%;
+}
+
+@keyframes testProgressBar {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+// #endregion
+
+// Todo: Da finire
+// #region
+// //! Lui usa una scroll progress timeline della frame e un calculation
+
+// //! Per la calculation, ha bisogno di un index...
+// $total-links: 4;
+// @for $i from 1 through $total-links {
+//   .navigation__list > li:nth-child(#{ $i }) > a {
+//     --i: #{$i};
+//   }
+// }
+
+// .carousel__link {
+//   animation: testLink;
+//   animation-timeline: --carousel-frame-scroll-timeline;
+//   //! Dopodichè, per ogni link (diverso) in base all'indice, usa un calculation su animation-range
+
+//   //! Il problema è che se all'interno ho del gap, devo simulare dei margini (padding) esterni, altrimenti la scroll timeline è sfasata.
+
+//   --start: calc((var(--i) - 1) * (25%));
+//   --end: calc(var(--i) * (25%));
+//   animation-range: var(--start) calc(var(--end) + 1px);
+// }
+
+// @keyframes testLink {
+//   from {
+//   }
+
+//   50% {
+//     background-color: red;
+//   }
+//   to {
+//   }
+// }
+// #endregion

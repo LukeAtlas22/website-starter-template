@@ -1,0 +1,111 @@
+@use "../../../abstracts" as *;
+
+$carousel-width: 100cqw; //Container: 'container' | Only use cqw
+$carousel-height: 20rem; //Container: 'container' | Only use cqw
+
+$carousel-slide-width: clamp(17.5rem, 75cqw, 45.75rem / 2);
+$carousel-slide-height: clamp(12rem, 100%, 25.75rem / 2);
+$carousel-slide-first-margin-start: 120%;
+$carousel-slide-last-margin-end: 120%;
+$carousel-slide-gap: 2rem;
+
+$carousel-scroll-behaviour: smooth;
+$carousel-scroll-direction: horizontal;
+$carousel-scroll-snap-type: mandatory;
+$carousel-scroll-snap-stop: always;
+$carousel-scroll-snap-align: start;
+
+$carousel-gap-between-carousel-and-navigation: 2.5rem;
+
+$carousel-buttons-display: no; // Use yes to display the buttons, (no ''), use any other values to not display them
+$carousel-buttons-width: clamp(3.75rem, 10vw, 4.5rem);
+$carousel-buttons-height: clamp(3.75rem, 10vw, 4.5rem);
+$carousel-buttons-border-radius: 100vw;
+$carousel-buttons-orientations: (
+  (min, width, 1px): horizontal);
+  $carousel-buttons-positions-change-property: --buttons-position; //Leave it like that | Dovrei lasciarlo così?
+  $carousel-buttons-positions: (
+  /// Valid positions: outside-carousel | feet-carousel | head-carousel | inside-carousel | left-carousel | right-carousel | display-none
+  (min, width, 1000px): outside-carousel,
+  (max, width, 1000px): feet-carousel,
+  (max, width, 500px): inside-carousel,
+  (max, width, 375px): display-none,);
+  $carousel-buttons-position-outside-carousel: (horizontal-offset: -5.75rem, vertical-offset: 0.0rem);
+  $carousel-buttons-position-inside-carousel:  (horizontal-offset: 2.75rem, vertical-offset: 0.0rem);
+  $carousel-buttons-position-feet-carousel:    (horizontal-offset: 0.00rem, vertical-offset: 3.5rem);
+  $carousel-buttons-position-right-carousel:   (horizontal-offset: 1.25rem, vertical-offset: 0.0rem);
+  $carousel-buttons-position-left-carousel:    (horizontal-offset: 0.00rem, vertical-offset: 0.0rem);
+  $carousel-buttons-border: 2px solid white;
+  $carousel-buttons-background: transparent;
+  $carousel-buttons-color: red;
+  $carousel-buttons-arrow-icon-shape: 1; // The SVG Shape (1-3)
+  $carousel-buttons-arrow-icon-inset: 0;
+  $carousel-buttons-arrow-icon-rescale: 1; // Leave it
+  $carousel-buttons-arrow-icon-stroke-width: 2;
+  $carousel-buttons-arrow-icon-color: red;
+  $carousel-buttons-arrow-icon-outline: 0.75; 
+  $carousel-buttons-arrow-icon-outline-offset: 0;
+  $carousel-buttons-arrow-icon-outline-color: white;
+  
+  $carousel-scroll-marker-group-position: after; // Use none if you want to not display it - OR - before || after
+  $carousel-scroll-marker-group-orientation: horizontal;
+  $carousel-scroll-marker-group-self-justification: center;
+  $carousel-scroll-marker-group-self-alignment: center; // Leave it
+  $carousel-scroll-marker-group-length: 50%; //Container: 'carousel'
+  $carousel-scroll-marker-group-gap: clamp(0.75rem, 8cqw, 1.5rem);
+  
+  $carousel-scroll-marker-backgrounds:(
+    (min, width, 1400px): use-slide-image,
+    (max, width, 1400px): use-counter-numbers,
+    (max, width, 1000px): use-default
+  );
+  $carousel-scroll-marker-style:(
+    use-default:(
+      width: clamp(1rem, 6.75cqw, 2.25rem), // Trasformare in size?
+      height: clamp(1rem, 6.75cqw, 2.25rem), // Trasformare in size?
+      border-radius: 100vw,
+      background-color: red,
+      background-color-hover: red,
+      background-color-active: red,
+      background-color-target-current: red,
+      border: 2px solid goldenrod,
+      border-hover: 2px solid goldenrod,
+      border-active: 2px solid goldenrod,
+      border-target-current: 2px solid goldenrod,
+      scale-hover: 1.1,
+      scale-target-current: 1.25,
+      transition: 375ms,
+    ),
+
+    use-slide-image:(
+      background-color: transparent,
+      background-color-hover: transparent,
+      background-color-active: transparent,
+      background-color-target-current: transparent,
+      background-size: cover,
+      background-repeat: no-repeat,
+      background-position: center,
+    ),
+    
+    use-counter-numbers:(
+      background-color: black,
+      background-color-hover: black,
+      background-color-active: black,
+      background-color-target-current: black,
+      color: gray,
+      color-hover: gray,
+      color-active: white,
+      color-target-current: #fff, // Strange behaviour - Use -active
+      border: 2px solid gray,
+      border-hover: 2px solid gray,
+      border-active: 2px solid white,
+      border-target-current: 2px solid white,
+      font-family: Arial, 
+      font-size: 1.75rem,
+      font-weight: bold,
+      text-decoration: none,
+    ),
+  );
+  
+  
+$carousel-debug-mode-on: no;

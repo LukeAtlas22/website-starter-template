@@ -1,0 +1,18 @@
+@use "tokens" as *;
+
+.carousel__frame {
+  display: flex;
+  gap: $carousel-frame-divs-gap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; // Remove scrollbar
+
+  > div {
+    scroll-snap-align: center;
+    scroll-snap-stop: $carousel-scroll-snap-stop-behaviour; // ! Tokenize
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

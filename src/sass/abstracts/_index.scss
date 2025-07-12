@@ -2,6 +2,11 @@
 @forward "colors";
 @forward "function";
 @forward "mixins";
+@forward "mixins-utilities";
+@forward "mixins/declare-custom-property-by-mediaQuery-map";
+@forward "mixins/apply-declarations";
+@forward "mixins/apply-background-image-on-sequence-of-child";
+@forward "mixins/create-snap-scroller";
 @forward "typography";
 @forward "sizes";
 @forward "sizes-fluid";

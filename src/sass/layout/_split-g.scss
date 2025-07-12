@@ -1,5 +1,4 @@
 @use "../abstracts/" as *;
-@use "../utilities-ext/" as *;
 
 .splitter-g {
   display: grid;
@@ -7,9 +6,6 @@
 
   --first: attr(first type(*));
   --second: attr(second type(*));
-  > div {
-    @extend .debug;
-  }
 }
 $template-colums: var(--first) var(--second);
 $default-breakpoint: medium;

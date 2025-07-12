@@ -1,0 +1,93 @@
+@use "tokens" as *;
+@use "../../../abstracts/" as *;
+@use "../../../icons/arrows/icons-arrows-map" as *;
+@use "../../../icons/function" as *;
+@use "../../../icons/mixins" as *;
+
+$orientation: $carousel-orientation;
+
+.carousel__button {
+  height: $carousel-buttons-size-block;
+  width: $carousel-buttons-size-inline;
+  border: $carousel-buttons-border;
+  border-radius: $carousel-buttons-border-radius;
+
+  &--next {
+    rotate: 90deg;
+    @if ($orientation == "vertical") {
+      rotate: 180deg;
+    }
+  }
+  &--prev {
+    rotate: -90deg;
+    @if ($orientation == "vertical") {
+      rotate: 0deg;
+    }
+  }
+}
+
+// ██▄ █ █ ▀█▀ ▀█▀ ▄▀▄ █▄ █ ▄▀▀    █ ▄▀▀ ▄▀▄ █▄ █
+// █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀    █ ▀▄▄ ▀▄▀ █ ▀█
+// #region
+
+$icon: getIcon(
+  $from: $arrow-icons-map,
+  $get: 3,
+);
+@include setIcon(
+  $icon,
+  $on: ".carousel__button",
+  $color: linear-gradient(to right, cyan, blue),
+  $inset: 0,
+  $rescale: 0.55,
+  $stroke-width: 2,
+  $outline: 3,
+  $outline-offset: 2,
+  $outline-color: rgb(0, 119, 128)
+);
+
+// #endregion
+
+// ██▄ █ █ ▀█▀ ▀█▀ ▄▀▄ █▄ █ ▄▀▀    █▀▄ ▄▀▄ ▄▀▀ █ ▀█▀ █ ▄▀▄ █▄ █ ▄▀▀
+// █▄█ ▀▄█  █   █  ▀▄▀ █ ▀█ ▄█▀    █▀  ▀▄▀ ▄█▀ █  █  █ ▀▄▀ █ ▀█ ▄█▀
+// #region
+// @if ($carousel-buttons-vertical-position == "align with navigation") {
+//   .carousel__button {
+//     position: absolute;
+//     top: anchor(0%);
+
+//     &--next {
+//       right: $carousel-buttons-horizontal-offset;
+//       translate: 50% -2%;
+//     }
+//     &--prev {
+//       left: $carousel-buttons-horizontal-offset;
+//       translate: -50% -2%;
+//     }
+//   }
+// }
+// @if ($carousel-buttons-vertical-position != "align with navigation") {
+//   .carousel__button {
+//     position: absolute;
+//     top: calc($carousel-buttons-vertical-position - $carousel-gap / 1.5);
+
+//     &--next {
+//       right: calc(0rem + $carousel-buttons-horizontal-offset);
+//       translate: 50% -50%;
+//     }
+//     &--prev {
+//       left: calc(0rem + $carousel-buttons-horizontal-offset);
+//       translate: -50% -50%;
+//     }
+//   }
+// }
+// Carousel buttons position:
+//  Side carousel
+//  Feet carousel
+//  In navigation
+
+// @if ($move-buttons-back-in-navigation-on-narrow-screens == "true"){
+//   // Move buttons back in navigation on narrow screens
+// }
+
+// #endregion

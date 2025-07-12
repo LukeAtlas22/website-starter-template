@@ -1,0 +1,95 @@
+@use "sass:map";
+@use "sass:string";
+@use "sass:meta";
+
+///
+/// @param {Map} $from - The map where the icon exist
+/// @param {Number} $get - The key of the map that contains the icon, this is a simple number.
+/// @return {url()} - The value of the key you asked to get as url() function
+/// @example $icon: getIcon($arrow-icons-map, 1);
+@function getIcon($from, $get) {
+  //! Err handling: I need get to be a number, since every map works with number
+  @return map.get($from, $get);
+}
+
+@function setStrokeColorOnUrl($svg-url, $color) {
+  $target: 'stroke=""';
+  $replacement: 'stroke="#{$color}"';
+
+  @if not(
+    meta.type-of($color) ==
+      "color" or
+      string.slice($color + "", 1, 1) ==
+      "%" or
+      $color ==
+      "currentColor" or
+      string.index($color + "", "var") !=
+      null
+  )
+  {
+    @error '❌ Errore: il valore passato non è un colore valido. Usa un colore Sass (es: red, #ff0000, rgba, %23ff0000 o "currentColor").';
+  }
+
+  // Trova dove inizia la stringa da sostituire
+  $pos: string.index($svg-url, $target);
+
+  @if $pos == null {
+    @error '❌ Errore: Nessun #{$target} trovato';
+  }
+
+  // Prima e dopo la stringa da sostituire
+  $before: string.slice($svg-url, 1, $pos - 1);
+  $after: string.slice($svg-url, $pos + string.length($target));
+
+  @return $before + $replacement + $after;
+}
+
+@function setFillColorOnUrl($svg-url, $color) {
+  $target: 'fill=""';
+  $replacement: 'fill="#{$color}"';
+
+  @if not(
+    meta.type-of($color) ==
+      "color" or
+      string.slice($color + "", 1, 1) ==
+      "%" or
+      $color ==
+      "currentColor" or
+      string.index($color + "", "var") !=
+      null
+  )
+  {
+    @error '❌ Errore: il valore passato non è un colore valido. Usa un colore Sass (es: red, #ff0000, rgba, %23ff0000 o "currentColor").';
+  }
+
+  // Trova dove inizia la stringa da sostituire
+  $pos: string.index($svg-url, $target);
+
+  @if $pos == null {
+    @error '❌ Errore: Nessun #{$target} trovato';
+  }
+
+  // Prima e dopo la stringa da sostituire
+  $before: string.slice($svg-url, 1, $pos - 1);
+  $after: string.slice($svg-url, $pos + string.length($target));
+
+  @return $before + $replacement + $after;
+}
+
+@function setStrokeWidthOnUrl($svg-url, $width) {
+  $target: 'stroke-width=""';
+  $replacement: 'stroke-width="#{$width}"';
+
+  // Trova dove inizia la stringa da sostituire
+  $pos: string.index($svg-url, $target);
+
+  @if $pos == null {
+    @error '❌ Errore: Nessun #{$target} trovato';
+  }
+
+  // Prima e dopo la stringa da sostituire
+  $before: string.slice($svg-url, 1, $pos - 1);
+  $after: string.slice($svg-url, $pos + string.length($target));
+
+  @return $before + $replacement + $after;
+}

@@ -1,0 +1,159 @@
+@use "tokens" as *;
+@use "../../../abstracts/" as *;
+
+//! To change for every instance of navigation
+$navigation-button-size-inline: $carousel-buttons-size-inline;
+
+// =================================================================
+// █   █ █ █▀▄ ▀█▀ █▄█    ▄▀▀ ▄▀▄ █   ▄▀▀ █ █ █   ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █
+// ▀▄▀▄▀ █ █▄▀  █  █ █    ▀▄▄ █▀█ █▄▄ ▀▄▄ ▀▄█ █▄▄ █▀█  █  █ ▀▄▀ █ ▀█
+// =================================================================
+// #region
+$nav-links-list-min-size: calc(
+  ($navigation-link-size * $navigation-min-size-in-links-number) +
+    (
+      $navigation-links-list-min-gap *
+        ($navigation-min-size-in-links-number - 1)
+    ) + ($navigation-link-size / 3)
+);
+
+$nav-links-list-max-size: calc(
+  ($navigation-link-size * $navigation-max-size-in-links-number) +
+    (
+      $navigation-links-list-min-gap *
+        ($navigation-max-size-in-links-number - 1)
+    ) + ($navigation-link-size * 1.5)
+);
+
+$buttons-position: $carousel-buttons-position;
+$c-remaining-size: 0%;
+$nav-justification: "";
+@if ($buttons-position == "inside navigation") {
+  $c-remaining-size: calc(
+    ($navigation-button-size-inline * 2) +
+      ($navigation-min-gap * 2) +
+      ($navigation-inline-padding * 2)
+  );
+  $nav-justification: space-between;
+} @else if($buttons-position != "inside navigation") {
+  $c-remaining-size: calc(
+    ($navigation-min-gap * 2) + ($navigation-inline-padding * 2)
+  );
+  $nav-justification: center;
+}
+
+$nav-min-size-in-links-number: calc(
+  $nav-links-list-min-size + $c-remaining-size
+);
+$nav-max-size-in-links-number: calc(
+  $nav-links-list-max-size + $c-remaining-size
+);
+// #endregion
+
+// =================================================================
+// █▄ ▄█ ██▀ █▀▄ █ ▄▀▄    ▄▀▄ █ █ ██▀ █▀▄ █ ██▀ ▄▀▀
+// █ ▀ █ █▄▄ █▄▀ █ █▀█    ▀▄█ ▀▄█ █▄▄ █▀▄ █ █▄▄ ▄█▀
+// =================================================================
+// #region
+@mixin MediaQueryFormula($NUMBER_OF_CHILD) {
+  @container (width > calc((#{$navigation-link-size} * #{$NUMBER_OF_CHILD}) + (#{$navigation-links-list-min-gap} * (#{$NUMBER_OF_CHILD} - 1)) + 4px)) {
+    @content;
+  }
+}
+
+@if (
+  $choose-navigation-min-max-size-by !=
+    "links-number" and
+    $choose-navigation-min-max-size-by !=
+    "size-length"
+) {
+  @error Size setting methodology does not exist, use a value between "links-number" or "size-length" to choose the sizing methodology;
+}
+
+$nav-min-width: "";
+$nav-max-width: "";
+@if ($choose-navigation-min-max-size-by == "links-number") {
+  $nav-min-width: $nav-min-size-in-links-number;
+  $nav-max-width: $nav-max-size-in-links-number;
+} @else if ($choose-navigation-min-max-size-by == "size-length") {
+  $nav-min-width: $navigation-min-size;
+  $nav-max-width: $navigation-max-size;
+}
+// #endregion
+
+// =====================================
+// █▄ █ ▄▀▄ █ █ █ ▄▀  ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █
+// █ ▀█ █▀█ ▀▄▀ █ ▀▄█ █▀█  █  █ ▀▄▀ █ ▀█
+// =====================================
+.navigation {
+  width: $navigation-size;
+
+  min-width: $nav-min-width;
+  max-width: $nav-max-width;
+
+  padding: $navigation-block-padding;
+  display: flex;
+  justify-content: $nav-justification;
+  align-items: center;
+  gap: $navigation-min-gap;
+  align-self: $navigation-justification;
+
+  &__button {
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - ($c-remaining-size));
+    min-width: $nav-links-list-min-size;
+    gap: $navigation-links-list-min-gap;
+  }
+
+  &__link {
+    min-width: $navigation-link-size;
+    border-radius: $navigation-link-border-radius;
+    display: inline-block;
+
+    aspect-ratio: 1/1;
+    outline: 2px solid green; // Debug
+  }
+}
+
+.navigation {
+  &__list {
+    container-type: inline-size;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $navigation-link-border-radius;
+  }
+}
+
+// ▄▀▀ █▄█ ▄▀▄ █   █       █ █ █▄ █ ▄▀▀ █▄█ ▄▀▄ █   █    █   █ █▄ █ █▄▀ ▄▀▀
+// ▄█▀ █ █ ▀▄▀ ▀▄▀▄▀       ▀▄█ █ ▀█ ▄█▀ █ █ ▀▄▀ ▀▄▀▄▀    █▄▄ █ █ ▀█ █ █ ▄█▀
+.navigation {
+  @for $i from 1 through $nav-links-amount {
+    li:nth-child(#{$i}) {
+      //? This is che closed state
+      display: none;
+      scale: 0;
+      opacity: 0;
+      transition-duration: 375ms;
+      transition-behavior: allow-discrete;
+      @include MediaQueryFormula(#{$i}) {
+        //? This is the open state
+        display: flex;
+        scale: 1;
+        opacity: 1;
+        @starting-style {
+          scale: 0;
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

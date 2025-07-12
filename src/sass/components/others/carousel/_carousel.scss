@@ -1,0 +1,27 @@
+@use "tokens" as *;
+
+.carousel {
+  width: $carousel-width;
+  min-width: $carousel-min-width;
+  max-width: $carousel-max-width;
+  height: calc($carousel-height + $carousel-gap);
+  min-height: calc($carousel-min-height + $carousel-gap);
+  max-height: calc($carousel-max-height + $carousel-gap);
+
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: $carousel-gap;
+
+  &__frame {
+    width: 100%;
+    height: 100%;
+  }
+  &__navigation {
+    height: auto; // Dettata dagli item della navigation
+    // outline: 5px solid cyan;
+    order: $carousel-navigation-order;
+  }
+}

@@ -10,4 +10,9 @@
   letter-spacing: $header-letter-spacing;
   background-color: $header-background-color;
   color: $header-color;
+
+  .icon {
+    width: $header-icons-width;
+    height: $header-icons-height;
+  }
 }
