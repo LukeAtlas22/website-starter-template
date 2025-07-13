@@ -121,7 +121,7 @@
 }
 @if ($carousel-debug-mode-on == yes) {
   .carousel__slide {
-    > img {
+    > * {
       display: none;
     }
   }
