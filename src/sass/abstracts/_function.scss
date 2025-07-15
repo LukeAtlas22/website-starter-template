@@ -1,5 +1,6 @@
 @use "sass:map";
 @use "sass:list";
+@use "sass:meta";
 @use "colors" as *;
 
 @function clr($color, $shade) {
@@ -14,10 +15,18 @@
   @return list.nth(map.keys($map), 1);
 }
 
-@function responsive-size($min, $size, $max) {
-  @return clamp($min, $size, $max);
+@function fluid-size($min, $size, $max) {
+  @return #{clamp($min, $size, $max)};
 }
+
+// #region Controls
 
 @function does-map-has-key($map, $key) {
   @return map.has-key($map, $key);
 }
+
+@function is-map($variable) {
+  @return meta.type-of($variable) == "map";
+}
+
+// #endregion

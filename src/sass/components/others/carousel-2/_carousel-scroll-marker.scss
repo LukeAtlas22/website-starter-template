@@ -34,7 +34,7 @@
     .carousel__slide::scroll-marker{
       content: counter(carousel-slide-counter);
       @include flex-center;
-      @include apply-declarations($from: map.get($carousel-scroll-marker-style, use-counter-numbers))
+      @include apply-declarations($from: map.get($carousel-scroll-marker-style, use-counter-numbers));
     }
   }
 }

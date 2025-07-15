@@ -58,7 +58,7 @@ $icon-url: getIcon($arrow-icons-map, $carousel-buttons-arrow-icon-shape);
 
 .carousel__container {
   @include declare-customProperty-by-mediaQuery-map(
-    $mediaQuery-values-map: $carousel-buttons-orientations, 
+    $mediaQuery-values-map: $carousel-buttons-orientations-map, 
     $customProperty: --buttons-orientation,
   );
 }
@@ -93,7 +93,7 @@ $icon-url: getIcon($arrow-icons-map, $carousel-buttons-arrow-icon-shape);
   //? Setting carousel buttons position
   @if ($carousel-buttons-display == yes) {
     @include declare-customProperty-by-mediaQuery-map(
-      $mediaQuery-values-map: $carousel-buttons-positions,
+      $mediaQuery-values-map: $carousel-buttons-positions-map,
       $customProperty: $carousel-buttons-positions-change-property
     );
   }

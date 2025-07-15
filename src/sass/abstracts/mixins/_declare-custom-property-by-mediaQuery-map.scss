@@ -1,4 +1,6 @@
 @use "../../abstracts/mixins" as *;
+@use "../../abstracts/function" as *;
+
 //Todo forse si potrebbe cambiare nome file e fare un modulo dedicato a questa roba
 /// Da utilizzare all'interno di un selettore - Include una media query, per ogni media query presente nella mappa.
 /// All'interno di questa media query... dichiara una custom property, con valore ($values) corrispondente per ogni media query...
@@ -31,17 +33,20 @@
 ///       --buttons-position: display-none;
 ///     }
 ///   }
-@mixin declare-customProperty-by-mediaQuery-map(
-  $mediaQuery-values-map,
-  $customProperty
-) {
-  @each $media-query, $values in $mediaQuery-values-map {
-    $type: nth($media-query, 1);
-    $size: nth($media-query, 2);
-    $breakpoint: nth($media-query, 3);
-    @include mq($type, $size, $breakpoint) {
-      #{$customProperty}: #{$values};
+@mixin declare-customProperty-by-mediaQuery-map($mediaQuery-values-map, $customProperty){
+  @if (is-map($mediaQuery-values-map)){
+    @each $media-query, $values in $mediaQuery-values-map {
+      $type: nth($media-query, 1);
+      $size: nth($media-query, 2);
+      $breakpoint: nth($media-query, 3);
+      @include mq($type, $size, $breakpoint) {
+        #{$customProperty}: #{$values};
+      }
     }
+  }
+  // If is not a map, we don't include media query
+  @else {
+    #{$customProperty}: $mediaQuery-values-map;
   }
 }
 
