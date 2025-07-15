@@ -1,0 +1,66 @@
+@use "../../../abstracts/" as *;
+@use "sass:string";
+
+$rsp-nav-gap: 3rem;
+$rsp-nav-padding-inline: 0rem;
+$rsp-nav-padding-block: 0rem;
+$rsp-nav-text-transform: uppercase;
+$rsp-nav-list-size: "Value calculated in mixin";
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+
+  @layer temp {
+    font-size: 1.5rem;
+    font-family: Arial;
+  }
+}
+
+.navigation__list {
+  display: flex;
+  gap: $rsp-nav-gap;
+}
+
+// .navigation__list-item {
+//   background-color: red;
+// }
+
+// .navigation__link {
+//   display: block;
+//   text-align: center;
+//   text-transform: $rsp-nav-text-transform;
+// }
+
+// .navigation__list--hamburger {
+//   //Mobile
+//   position: absolute;
+//   inset: 0;
+//   background-color: $body-background-color;
+//   z-index: 1;
+//   display: none;
+// }
+
+// @mixin create-responsive-navigation($links) {
+//   //! It should not work
+//   //Todo - to move
+//   $i: 1;
+//   $total-length: 0;
+//   @each $link in $links {
+//     $length: string.length($link);
+//     @if ($rsp-nav-text-transform == uppercase) {
+//       $length: $length + 2;
+//     }
+//     $total-length: $total-length + $length;
+//     .navigation__list-item:nth-child(#{$i}) {
+//       width: #{$length}ch;
+//     }
+//     $i: $i + 1;
+//   }
+//   $rsp-nav-list-size: $total-length + $rsp-nav-padding-inline + $rsp-nav-gap;
+// }
+
+// @include create-responsive-navigation(
+//   ("Contacts", "Abouts", "Learn more", "Register", "Login")
+// );

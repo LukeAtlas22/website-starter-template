@@ -4,20 +4,28 @@
 @use "../../../icons/" as *;
 @use "carousel-mixins/selectors" as *;
 
+
 // ▄▀▄ ▄▀▀ █▀▄ ██▀ ▄▀▀ ▀█▀
 // █▀█ ▄█▀ █▀  █▄▄ ▀▄▄  █
+@include BothButtonsPseudo{
+  content: "";
+  opacity: 0;
+  cursor: pointer;
+}
 
 @include BothButtons() {
-  content: "";
   position: absolute;
   position-anchor: --carousel;
   width: $carousel-buttons-width;
   height: $carousel-buttons-height;
   border-radius: $carousel-buttons-border-radius;
-  border: $carousel-buttons-border;
+}
+
+// Only apply style on DOM Buttons for performance
+@include BothButtonsDOM(){
+  box-shadow: $carousel-buttons-box-shadows;
   background: $carousel-buttons-background;
   color: $carousel-buttons-color;
-  cursor: pointer;
 }
 
 //?Putting the pseudoelements over the normal elements

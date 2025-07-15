@@ -7,11 +7,12 @@
   $childs-pseudo-element,
   $childs-number,
   $images-path,
-  $images-path-ending-divisor
+  $images-path-ending-divisor,
+  $images-ext: ".png"
 ) {
   @for $i from 1 through $childs-number {
     #{$childs-selector}:nth-child(#{$i})#{$childs-pseudo-element} {
-      background-image: url("#{$images-path}#{$images-path-ending-divisor}#{$i}");
+      background-image: url("#{$images-path}#{$images-path-ending-divisor}#{$i}#{$images-ext}");
     }
   }
 }

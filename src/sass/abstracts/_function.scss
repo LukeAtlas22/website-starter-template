@@ -17,3 +17,7 @@
 @function responsive-size($min, $size, $max) {
   @return clamp($min, $size, $max);
 }
+
+@function does-map-has-key($map, $key) {
+  @return map.has-key($map, $key);
+}

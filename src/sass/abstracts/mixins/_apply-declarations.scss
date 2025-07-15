@@ -32,7 +32,7 @@
 /// @param {CSS Selector} $on - The class on which you will set the declarations
 /// @param {SCSS Map} $from - The map where you will get the declarations
 /// @output
-@mixin apply-declarations($on, $from) {
+@mixin apply-declarations($on: '', $from) {
   $on-normal: ();
   $on-hover: ();
   $on-active: ();
@@ -50,7 +50,7 @@
     } @else if (doesSubstringExist($in: $property, $check: -focus)) {
       $property: remove-substring($property, -focus);
       $on-focus: push($map: $on-focus,$entry: ($property: $value),);
-    } @else if (doesSubstringExist($in: $property, $check: -visible)) {
+    } @else if (doesSubstringExist($in: $property, $check: -visible)) { //Todo: spostare questa prima di focus
       $property: remove-substring($property, -visible);
       $on-focus-visible: push($map: $on-focus-visible,$entry: ($property: $value),);
     } @else if (doesSubstringExist($in: $property, $check: -target-current)) {
@@ -71,20 +71,37 @@
     target-current: $on-target-current,
   );
 
-  // Per ogni mappa, creo un selettore e distribuisco le declarations.
-  // Per eliminare selettori vuoti affidarsi a un plugin.
-  @each $state, $map in $maps {
-    @if ($state != normal) {
-      #{$on}:is(:#{$state}) {
+  @if ($on == ""){
+    @each $state, $map in $maps {
+      @if ($state != normal) {
+        &:is(:#{$state}) {
+          @each $property, $value in $map {
+            #{$property}: $value;
+          }
+        }
+      }
+      @if ($state == normal) {
         @each $property, $value in $map {
           #{$property}: $value;
         }
       }
     }
-    @if ($state == normal) {
-      #{$on} {
-        @each $property, $value in $map {
-          #{$property}: $value;
+  }
+
+  @if ($on != ""){
+    @each $state, $map in $maps {
+      @if ($state != normal) {
+        #{$on}:is(:#{$state}) {
+          @each $property, $value in $map {
+            #{$property}: $value;
+          }
+        }
+      }
+      @if ($state == normal) {
+        #{$on}{
+          @each $property, $value in $map {
+            #{$property}: $value;
+          }
         }
       }
     }

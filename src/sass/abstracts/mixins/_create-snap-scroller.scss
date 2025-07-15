@@ -14,11 +14,13 @@
     flex-direction: row;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    overflow-y: clip;
   }
   @if ($direction == vertical) {
     flex-direction: column;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
+    overflow-x: clip;
   } @else if ($direction != horizontal and $direction != vertical) {
     @error 'Wrong direction, chose between: horizontal | vertical';
   }

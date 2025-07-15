@@ -32,12 +32,14 @@
 .carousel {
   margin-inline: auto;
   position: relative;
-  anchor-name: --carousel;
   width: 100%;
   height: 100%;
+  background: $carousel-background;
   align-items: center; // Don't justify
+  border-radius: $carousel-border-radius;
   gap: $carousel-slide-gap;
 
+  anchor-name: --carousel;
   counter-reset: carousel-slide-counter 0; //Todo: create-counter mixin
   @include create-snap-scroller(
     $direction: $carousel-scroll-direction,

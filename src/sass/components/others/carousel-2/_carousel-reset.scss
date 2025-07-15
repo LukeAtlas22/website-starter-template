@@ -3,3 +3,7 @@
 *::scroll-button(*) {
   box-sizing: border-box;
 }
+
+ul:is(.carousel) {
+  list-style: none;
+}
