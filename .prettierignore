@@ -5,3 +5,5 @@ src/sass/components/others/carousel-2/_carousel-scroll-marker.scss
 
 src/sass/abstracts/mixins/_apply-declarations.scss
 src/sass/abstracts/mixins/_declare-custom-property-by-mediaQuery-map.scss
+src/sass/components/others/carousel-2/_carousel-scroll-marker-group.scss
+src/sass/components/others/carousel-2/_carousel-buttons.scss

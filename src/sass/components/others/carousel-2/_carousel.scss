@@ -32,8 +32,13 @@
 .carousel {
   margin-inline: auto;
   position: relative;
-  width: 100%;
-  height: 100%;
+  @if ($carousel-sizing-behaviour == ignore-navigation-size) {
+    width: $carousel-width;
+    height: $carousel-height;
+  } @else if ($carousel-sizing-behaviour == stretch-with-navigation) {
+    width: 100%;
+    height: 100%;
+  }
   background: $carousel-background;
   align-items: center; // Don't justify
   border-radius: $carousel-border-radius;

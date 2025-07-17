@@ -4,246 +4,264 @@
 @use "../../../icons/" as *;
 @use "carousel-mixins/selectors" as *;
 
+//Todo: Ho bisogno di settare alcune ifs, per migliorare la performance di questo codice.
+//Todo: Molte ifs andranno settate
+//Todo: Le if dovranno essere fatte sulla entry di alcune mappe, in particolare sul valore. Quindi mi serviranno alcune funzioni tipo - map-has-entry o map-has-value o map-contains (per farlo sia sul value che sulla key)
 
-// ▄▀▄ ▄▀▀ █▀▄ ██▀ ▄▀▀ ▀█▀
-// █▀█ ▄█▀ █▀  █▄▄ ▀▄▄  █
-@include BothButtonsPseudo{
-  content: "";
-  opacity: 0;
-  cursor: pointer;
-}
-
-@include BothButtons() {
-  position: absolute;
-  position-anchor: --carousel;
-  width: $carousel-buttons-width;
-  height: $carousel-buttons-height;
-  border-radius: $carousel-buttons-border-radius;
-}
-
-// Only apply style on DOM Buttons for performance
-@include BothButtonsDOM(){
-  box-shadow: $carousel-buttons-box-shadows;
-  background: $carousel-buttons-background;
-  color: $carousel-buttons-color;
-}
-
-//?Putting the pseudoelements over the normal elements
-//Todo: da spostare
-.carousel::scroll-button(*) {
-  z-index: 1;
-}
-
-// █ ▄▀▀ ▄▀▄ █▄ █
-// █ ▀▄▄ ▀▄▀ █ ▀█
-
-$icon-url: getIcon($arrow-icons-map, $carousel-buttons-arrow-icon-shape);
-
-@include BothButtonsDOM() {
-  @include flex-center;
-  @include setIconOn(
-    $url: $icon-url,
-    $color: $carousel-buttons-arrow-icon-color,
-    $inset: $carousel-buttons-arrow-icon-inset,
-    $stroke-width: $carousel-buttons-arrow-icon-stroke-width,
-    $outline: $carousel-buttons-arrow-icon-outline,
-    $outline-offset: $carousel-buttons-arrow-icon-outline-offset,
-    $outline-color: $carousel-buttons-arrow-icon-outline-color,
-    $rescale: $carousel-buttons-arrow-icon-rescale
-  );
-}
-
-// ▄▀▄ █▀▄ █ ██▀ █▄ █ ▀█▀ ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █
-// ▀▄▀ █▀▄ █ █▄▄ █ ▀█  █  █▀█  █  █ ▀▄▀ █ ▀█
-
-.carousel__container {
-  @include declare-customProperty-by-mediaQuery-map(
-    $mediaQuery-values-map: $carousel-buttons-orientations-map, 
-    $customProperty: --buttons-orientation,
-  );
-}
-
-@include NextButton() {
-  @container style(--buttons-orientation: horizontal) {
-    rotate: 90deg;
-    // Inverting height & width
-    width: $carousel-buttons-height;
-    height: $carousel-buttons-width;
-  }
-  @container style(--buttons-orientation: vertical) {
-    rotate: 180deg;
-  }
-}
-@include PrevButton() {
-  @container style(--buttons-orientation: horizontal) {
-    rotate: -90deg;
-    // Inverting height & width
-    width: $carousel-buttons-height;
-    height: $carousel-buttons-width;
-  }
-  @container style(--buttons-orientation: vertical) {
-    rotate: 0deg;
-  }
-}
-
-// █▀▄ ▄▀▄ ▄▀▀ █ ▀█▀ █ ▄▀▄ █▄ █ █ █▄ █ ▄▀
-// █▀  ▀▄▀ ▄█▀ █  █  █ ▀▄▀ █ ▀█ █ █ ▀█ ▀▄█
-
-.carousel__container {
-  //? Setting carousel buttons position
-  @if ($carousel-buttons-display == yes) {
-    @include declare-customProperty-by-mediaQuery-map(
-      $mediaQuery-values-map: $carousel-buttons-positions-map,
-      $customProperty: $carousel-buttons-positions-change-property
-    );
-  }
-}
-
-// Translating back in y to element size
-@include BothButtons() {
-  translate: 0 -50%;
-}
-
-// Position 1 - Outside carousel
-@container style(--buttons-position: outside-carousel) {
-  @include NextButton() {
-    //prettier-ignore
-    top: calc(anchor(center) + map.get($carousel-buttons-position-outside-carousel, vertical-offset));
-    //prettier-ignore
-    left: calc(anchor(right) + map.get($carousel-buttons-position-outside-carousel, horizontal-offset));
-  }
-
-  @include PrevButton() {
-    //prettier-ignore
-    top: calc(anchor(center) + map.get($carousel-buttons-position-outside-carousel, vertical-offset));
-    //prettier-ignore
-    right: calc(anchor(left) + map.get($carousel-buttons-position-outside-carousel, horizontal-offset));
-  }
-}
-
-// Position 2 - Inside carousel
-@container style(--buttons-position: inside-carousel) {
-  @include NextButton() {
-    //prettier-ignore
-    top: calc(anchor(center) + map.get($carousel-buttons-position-inside-carousel, vertical-offset));
-    // prettier-ignore
-    right: calc(anchor(right) + map.get($carousel-buttons-position-inside-carousel, horizontal-offset));
-  }
-
-  @include PrevButton() {
-    //prettier-ignore
-    top: calc(anchor(center) + map.get($carousel-buttons-position-inside-carousel, vertical-offset));
-    // prettier-ignore
-    left: calc(anchor(left) + map.get($carousel-buttons-position-inside-carousel, horizontal-offset));
-  }
-}
-
-// Position 3 - Feet carousel
-@container style(--buttons-position: feet-carousel) {
-  @include NextButton() {
-    //prettier-ignore
-    top: calc(anchor(bottom) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
-    //prettier-ignore
-    right: calc(anchor(right) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
-  }
-
-  @include PrevButton() {
-    //prettier-ignore
-    top: calc(anchor(bottom) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
-    //prettier-ignore
-    left: calc(anchor(left) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
-  }
-}
-
-// Position 4 - Head carousel
-@container style(--buttons-position: head-carousel) {
-  @include NextButton() {
-    //prettier-ignore
-    bottom: calc(anchor(top) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
-    //prettier-ignore
-    right: calc(anchor(right) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
-  }
-
-  @include PrevButton() {
-    //prettier-ignore
-    bottom: calc(anchor(top) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
-    //prettier-ignore
-    left: calc(anchor(left) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
-  }
-}
-
-// Position 5 - Right carousel
-@container style(--buttons-position: right-carousel) {
-  @include NextButton() {
-    //prettier-ignore
-    bottom: calc(anchor(bottom) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
-    //prettier-ignore
-    left: calc(anchor(right) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
-  }
-
-  @include PrevButton() {
-    //prettier-ignore
-    top: calc(anchor(top) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
-    //prettier-ignore
-    left: calc(anchor(right) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
-  }
-
-  @include BothButtons() {
-    translate: 0 0;
-  }
-}
-
-// Position 6 - Left carousel
-@container style(--buttons-position: left-carousel) {
-  @include NextButton() {
-    //prettier-ignore
-    bottom: calc(anchor(bottom) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
-    //prettier-ignore
-    right: calc(anchor(left) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
-  }
-
-  @include PrevButton() {
-    //prettier-ignore
-    top: calc(anchor(top) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
-    //prettier-ignore
-    right: calc(anchor(left) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
-  }
-
-  @include BothButtons() {
-    translate: 0 0;
-  }
-}
-
-// No display - Display none
-@container style(--buttons-position: display-none) {
+@if ($carousel-buttons-display != yes) {
   @include BothButtons() {
     display: none;
   }
 }
 
-@if ($carousel-buttons-display != yes) {
-  @include BothButtons() {
-    display: none !important;
-  }
-}
+@if ($carousel-buttons-display == yes){
 
-// █▀ █ █ █▄ █ ▄▀▀ ▀█▀ █ ▄▀▄ █▄ █ ▄▀▄ █   █ ▀█▀ ▀▄▀
-// █▀ ▀▄█ █ ▀█ ▀▄▄  █  █ ▀▄▀ █ ▀█ █▀█ █▄▄ █  █   █
-//! In attesa che i valori next e prev di scroll-button() diventino disponibili, usiamo questo work-around
-.carousel__container {
-  --scroll-direction: #{$carousel-scroll-direction};
-}
-@container style(--scroll-direction: vertical) {
-  //? Moving the up and down button in front of the right and left, for vertical scrolling...
-  .carousel::scroll-button(down){z-index: 1;};
-  .carousel::scroll-button(right){z-index: -1};
-  .carousel::scroll-button(up){z-index: 1};
-  .carousel::scroll-button(left){z-index: -1;}
-}
-@container style(--scroll-direction: horizontal) {
-  //? The opposite...
-  .carousel::scroll-button(down){z-index: -1;};
-  .carousel::scroll-button(right){z-index: 1};
-  .carousel::scroll-button(up){z-index: -1};
-  .carousel::scroll-button(left){z-index: 1;}
+  // ▄▀▄ ▄▀▀ █▀▄ ██▀ ▄▀▀ ▀█▀
+  // █▀█ ▄█▀ █▀  █▄▄ ▀▄▄  █
+  @include BothButtonsPseudo{
+    content: "";
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  @include BothButtons() {
+    position: absolute;
+    position-anchor: --carousel;
+    width: $carousel-buttons-width;
+    height: $carousel-buttons-height;
+    border-radius: $carousel-buttons-border-radius;
+  }
+
+  // Only apply style on DOM Buttons for performance
+  @include BothButtonsDOM(){
+    box-shadow: $carousel-buttons-box-shadows;
+    background: $carousel-buttons-background;
+    color: $carousel-buttons-color;
+  }
+
+  //?Putting the pseudoelements over the normal elements
+  //Todo: da spostare
+  .carousel::scroll-button(*) {
+    z-index: 1;
+  }
+
+  // █ ▄▀▀ ▄▀▄ █▄ █
+  // █ ▀▄▄ ▀▄▀ █ ▀█
+
+  $icon-url: getIcon($arrow-icons-map, $carousel-buttons-arrow-icon-shape);
+
+  @include BothButtonsDOM() {
+    @include flex-center;
+    @include setIconOn(
+      $url: $icon-url,
+      $color: $carousel-buttons-arrow-icon-color,
+      $inset: $carousel-buttons-arrow-icon-inset,
+      $stroke-width: $carousel-buttons-arrow-icon-stroke-width,
+      $outline: $carousel-buttons-arrow-icon-outline,
+      $outline-offset: $carousel-buttons-arrow-icon-outline-offset,
+      $outline-color: $carousel-buttons-arrow-icon-outline-color,
+      $rescale: $carousel-buttons-arrow-icon-rescale
+    );
+  }
+
+  // ▄▀▄ █▀▄ █ ██▀ █▄ █ ▀█▀ ▄▀▄ ▀█▀ █ ▄▀▄ █▄ █
+  // ▀▄▀ █▀▄ █ █▄▄ █ ▀█  █  █▀█  █  █ ▀▄▀ █ ▀█
+
+  .carousel__container {
+    @include declare-customProperty-by-mediaQuery-map(
+      $mediaQuery-values-map: $carousel-buttons-orientations-map, 
+      $customProperty: --buttons-orientation,
+    );
+  }
+  @include NextButton() {
+    @container style(--buttons-orientation: horizontal) {
+      rotate: 90deg;
+      // Inverting height & width
+      width: $carousel-buttons-height;
+      height: $carousel-buttons-width;
+    }
+    @container style(--buttons-orientation: vertical) {
+      rotate: 180deg;
+    }
+  }
+  @include PrevButton() {
+    @container style(--buttons-orientation: horizontal) {
+      rotate: -90deg;
+      // Inverting height & width
+      width: $carousel-buttons-height;
+      height: $carousel-buttons-width;
+    }
+    @container style(--buttons-orientation: vertical) {
+      rotate: 0deg;
+    }
+  }
+
+  // █▀▄ ▄▀▄ ▄▀▀ █ ▀█▀ █ ▄▀▄ █▄ █ █ █▄ █ ▄▀
+  // █▀  ▀▄▀ ▄█▀ █  █  █ ▀▄▀ █ ▀█ █ █ ▀█ ▀▄█
+
+  .carousel__container {
+    //? Setting carousel buttons position
+    @if ($carousel-buttons-display == yes) {
+      @include declare-customProperty-by-mediaQuery-map(
+        $mediaQuery-values-map: $carousel-buttons-positions-map,
+        $customProperty: $carousel-buttons-positions-change-property
+      );
+    }
+  }
+
+  // Translating back in y to element size
+  @include BothButtons() {
+    translate: 0 -50%;
+  }
+
+  // Position 1 - Outside carousel
+  @container style(--buttons-position: outside-carousel) {
+    @include NextButton() {
+      top: calc(anchor(center) + map.get($carousel-buttons-position-outside-carousel, vertical-offset));
+      left: calc(anchor(right) + map.get($carousel-buttons-position-outside-carousel, horizontal-offset));
+    }
+
+    @include PrevButton() {
+      top: calc(anchor(center) + map.get($carousel-buttons-position-outside-carousel, vertical-offset));
+      right: calc(anchor(left) + map.get($carousel-buttons-position-outside-carousel, horizontal-offset));
+    }
+  }
+
+  // Position 2 - Inside carousel
+  @container style(--buttons-position: inside-carousel) {
+    @include NextButton() {
+      top: calc(anchor(center) + map.get($carousel-buttons-position-inside-carousel, vertical-offset));
+      right: calc(anchor(right) + map.get($carousel-buttons-position-inside-carousel, horizontal-offset));
+    }
+
+    @include PrevButton() {
+      top: calc(anchor(center) + map.get($carousel-buttons-position-inside-carousel, vertical-offset));
+      left: calc(anchor(left) + map.get($carousel-buttons-position-inside-carousel, horizontal-offset));
+    }
+  }
+
+  // Position 3 - Feet carousel
+  @container style(--buttons-position: feet-carousel) {
+    @include NextButton() {
+      top: calc(anchor(bottom) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
+      right: calc(anchor(right) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
+    }
+
+    @include PrevButton() {
+      top: calc(anchor(bottom) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
+      left: calc(anchor(left) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
+    }
+  }
+
+  // Position 4 - Head carousel
+  @container style(--buttons-position: head-carousel) {
+    @include NextButton() {
+      bottom: calc(anchor(top) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
+      right: calc(anchor(right) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
+    }
+
+    @include PrevButton() {
+      bottom: calc(anchor(top) + map.get($carousel-buttons-position-feet-carousel, vertical-offset));
+      left: calc(anchor(left) + map.get($carousel-buttons-position-feet-carousel, horizontal-offset));
+    }
+  }
+
+  // Position 5 - Right carousel
+  @container style(--buttons-position: right-carousel) {
+    @include NextButton() {
+      bottom: calc(anchor(bottom) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
+      left: calc(anchor(right) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
+    }
+
+    @include PrevButton() {
+      top: calc(anchor(top) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
+      left: calc(anchor(right) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
+    }
+
+    @include BothButtons() {
+      translate: 0 0;
+    }
+  }
+
+  // Position 6 - Left carousel
+  @container style(--buttons-position: left-carousel) {
+    @include NextButton() {
+      bottom: calc(anchor(bottom) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
+      right: calc(anchor(left) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
+    }
+
+    @include PrevButton() {
+      top: calc(anchor(top) + map.get($carousel-buttons-position-right-carousel, vertical-offset));
+      right: calc(anchor(left) + map.get($carousel-buttons-position-right-carousel, horizontal-offset));
+    }
+
+    @include BothButtons() {
+      translate: 0 0;
+    }
+  }
+
+
+  // Position 6 - Inside Navigation
+  .carousel__container{
+    --scroll-marker-group-orientation: #{$carousel-scroll-marker-group-orientation};
+    /*Make this map (?)*/
+  }
+  @container --carousel-container style(--buttons-position: inside-navigation) {
+    @include BothButtons{
+      position-anchor: --scroll-marker-group;
+    }
+
+    @container --carousel-container style(--scroll-marker-group-orientation: horizontal){
+      @include NextButton() {
+        top: anchor(center);
+        left: anchor(right);
+      }
+      @include PrevButton() {
+        top: anchor(center);
+        right: anchor(left);
+      }
+    }
+
+    @container --carousel-container style(--scroll-marker-group-orientation: vertical){
+      @include NextButton() {
+        top: anchor(bottom);
+        left: anchor(center);
+      }
+      @include PrevButton() {
+        bottom: anchor(top);
+        left: anchor(center);
+      }
+      @include BothButtons(){
+        translate: -50% 0;
+      }
+    }
+  }
+
+  // No display - Display none
+  @container style(--buttons-position: display-none) {
+    @include BothButtons() {
+      display: none;
+    }
+  }
+
+  // █▀ █ █ █▄ █ ▄▀▀ ▀█▀ █ ▄▀▄ █▄ █ ▄▀▄ █   █ ▀█▀ ▀▄▀
+  // █▀ ▀▄█ █ ▀█ ▀▄▄  █  █ ▀▄▀ █ ▀█ █▀█ █▄▄ █  █   █
+  //! In attesa che i valori next e prev di scroll-button() diventino disponibili, usiamo questo work-around
+  .carousel__container {
+    --scroll-direction: #{$carousel-scroll-direction};
+  }
+  @container style(--scroll-direction: vertical) {
+    //? Moving the up and down button in front of the right and left, for vertical scrolling...
+    .carousel::scroll-button(down){z-index: 1;};
+    .carousel::scroll-button(right){z-index: -1};
+    .carousel::scroll-button(up){z-index: 1};
+    .carousel::scroll-button(left){z-index: -1;}
+  }
+  @container style(--scroll-direction: horizontal) {
+    //? The opposite...
+    .carousel::scroll-button(down){z-index: -1;};
+    .carousel::scroll-button(right){z-index: 1};
+    .carousel::scroll-button(up){z-index: -1};
+    .carousel::scroll-button(left){z-index: 1;}
+  }
 }

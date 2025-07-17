@@ -1,21 +1,26 @@
 @use "tokens" as *;
+@use "carousel-functions/carousel-functions.scss" as Carousel;
+@use "../../../abstracts/" as *;
 @use "sass:map";
 
 .carousel {
   scroll-marker-group: $carousel-scroll-marker-group-position;
 
-  // Self alignment & sizing
   &::scroll-marker-group {
+
+    // Self alignment & sizing
     justify-self: $carousel-scroll-marker-group-self-justification;
     align-self: $carousel-scroll-marker-group-self-alignment;
-    //prettier-ignore
     block-size: map-get(map-get($carousel-scroll-marker-style, use-default), height);
-    inline-size: $carousel-scroll-marker-group-length;
     writing-mode: $carousel-scroll-marker-group-orientation + -lr;
-  }
 
-  // Internal markers
-  &::scroll-marker-group {
+    // Anchor
+    anchor-name: --scroll-marker-group;
+
+    //inline-size
+    inline-size: map.get(map.get($carousel-scroll-marker-style, use-default), width);
+    
+    // Internal markers
     display: grid;
     grid-auto-flow: column;
     justify-content: center;
@@ -26,4 +31,91 @@
     scroll-behavior: smooth;
     // Qui posso fare una view transition che li scala appena entrano in view...
   }
+}
+
+@if (true){ //Always, only need this for scope
+  $scroll-marker-inline-size: Carousel.getScrollMarkerStyle($from: use-slide-image, $get: width);
+  $scroll-marker-group-gap: $carousel-scroll-marker-group-gap;
+  $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-default);
+
+  .carousel::scroll-marker-group{
+      inline-size: calc(
+        ( $scroll-marker-inline-size * var(--carousel-slide-amount) ) +
+        ( $scroll-marker-group-gap * var(--carousel-slide-amount)) +
+        ( $scroll-marker-group-margins-from-buttons )
+      );
+    }
+}
+
+
+// If use slide image
+@if (map-has-key($map: $carousel-scroll-marker-style, $key: use-slide-image)){
+  $scroll-marker-inline-size: Carousel.getScrollMarkerStyle($from: use-slide-image, $get: width);
+  $scroll-marker-group-gap: $carousel-scroll-marker-group-gap;
+  $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-slide-image); // A.K.A - Inline padding
+
+  @container --carousel-container style(--scroll-marker-background: use-slide-image){
+    .carousel::scroll-marker-group{
+      inline-size: calc(
+        ( $scroll-marker-inline-size * var(--carousel-slide-amount) ) +
+        ( $scroll-marker-group-gap * var(--carousel-slide-amount)) +
+        ( $scroll-marker-group-margins-from-buttons )
+      );
+    }
+  }
+}
+
+// If use counter numbers
+@if (map-has-key($map: $carousel-scroll-marker-style, $key: use-counter-numbers)){
+  $scroll-marker-inline-size: Carousel.getScrollMarkerStyle($from: use-counter-numbers, $get: width);
+  $scroll-marker-group-gap: $carousel-scroll-marker-group-gap;
+  $scroll-marker-group-margins-from-buttons: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-use-counter-numbers);
+
+  @container --carousel-container style(--scroll-marker-background: use-counter-numbers){
+    .carousel::scroll-marker-group{
+      inline-size: calc(
+        ( $scroll-marker-inline-size * var(--carousel-slide-amount) ) +
+        ( $scroll-marker-group-gap * var(--carousel-slide-amount)) +
+        ( $scroll-marker-group-margins-from-buttons )
+      );
+    }
+  }
+}
+
+
+////////////////////////////////////////////////////
+//Todo - Da sistemare meglio
+//! Setting inline margins if buttons position it's inside navigation
+@if (true){ // If to do
+  $buttons-margins: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-default);
+  $buttons-width: $carousel-buttons-width;
+  @container --carousel-container style(--buttons-position: inside-navigation){
+    .carousel::scroll-marker-group{
+      margin-inline: calc(
+        $buttons-width +
+        $buttons-margins -
+        0.95rem // Tokenize?
+      );
+    }
+  }
+}
+
+@if (true){ // If general behaviour it's NOT Stretch with navigation
+  $buttons-margins: map.get($carousel-buttons-position-inside-navigation, margins-from-scroll-markers-group-when-default);
+  $buttons-width: $carousel-buttons-width;
+  @container --carousel-container
+  style(--buttons-position: inside-navigation) and
+  style(--scroll-marker-group-orientation: vertical) {
+    .carousel::scroll-marker-group{
+      margin-inline: calc(
+        $buttons-width -
+        $buttons-margins -
+        0.95rem // Tokenize?
+      );
+    }
+  }
+}
+//! Temp
+.carousel__container{
+  --scroll-marker-group-orientation: #{$carousel-scroll-marker-group-orientation};
 }

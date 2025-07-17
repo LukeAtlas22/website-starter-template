@@ -1,4 +1,6 @@
 @use "../tokens" as *;
+@use "sass:map";
+
 @function getAxis() {
   @if ($carousel-scroll-direction == horizontal) {
     @return x;
@@ -6,4 +8,8 @@
   @if ($carousel-scroll-direction == vertical) {
     @return y;
   }
+}
+
+@function getScrollMarkerStyle($from, $get) {
+  @return map.get(map.get($carousel-scroll-marker-style, #{$from}), #{$get});
 }

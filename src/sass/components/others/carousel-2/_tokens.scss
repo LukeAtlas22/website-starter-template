@@ -4,14 +4,17 @@
 // #region Prototype 1
 $carousel-width: clamp(18rem, 95cqw, 40rem); //Container: 'container' | Only use cqw
 $carousel-height: clamp(10rem, 85cqw, 27.75rem); //Container: 'container' | Only use cqw
-$carousel-border-radius: clamp(1rem, 12cqw, 2.75rem);
+$carousel-border-radius: 24px; //clamp(1rem, 12cqw, 2.75rem);
 $carousel-background: rgba(128, 128, 128, 0.267);
+
+$carousel-sizing-behaviour: stretch-with-navigation; // stretch-with-navigation || ignore-navigation-size
 
 $carousel-slide-width: 100%;
 $carousel-slide-height: 100%;
 $carousel-slide-first-margin-start: 0%;
 $carousel-slide-last-margin-end: 0%;
 $carousel-slide-gap: 5.75%;
+//$carousel-slide-amount: 4; // Provide the number of slides for computing reasons
 
 $carousel-scroll-behaviour: smooth;
 $carousel-scroll-direction: horizontal;
@@ -26,39 +29,58 @@ $carousel-scroll-auto-scroll-speed: 2225; // in ms
 
 $carousel-gap-between-carousel-and-navigation: 2.5rem;
 
-$carousel-buttons-display: yes; // Use yes to display the buttons, (no ''), use any other values to not display them
+$carousel-buttons-display: yes; // yes || no - no means that all the code related to the buttons it will not be loaded - if you need to responsively display the buttons, then delegate it to the buttons-positions-map.
 $carousel-buttons-width: clamp(3.75rem, 10vw, 4.5rem);
 $carousel-buttons-height: clamp(3.75rem, 10vw, 4.5rem);
-$carousel-buttons-border-radius: 100vw;
+$carousel-buttons-border-radius: 120vw;
 $carousel-buttons-orientations-map: ( 
   // Valid orientations: horizontal || vertical
   horizontal
 );
 $carousel-buttons-positions-change-property: --buttons-position; //Leave it like that | Dovrei lasciarlo così?
+/** Docs $carousel-buttons-position-map
+ *
+ * Mappa che definisce le posizioni disponibili per i pulsanti del carosello.
+ * Le chiavi possono essere media queries (opzionali), i valori sono stringhe
+ * che rappresentano la posizione del bottone.
+ *
+ * Valori validi:
+ * - outside-carousel
+ * - feet-carousel
+ * - head-carousel
+ * - inside-carousel
+ * - left-carousel
+ * - right-carousel
+ * - display-none
+ * - inside-navigation
+ *
+ * - Sintassi media query:
+ * - ([min || max], width, breakpoint)
+ *
+ * Esempio d’uso:
+ * (
+ *   (min, width, 1000px): outside-navigation,
+ *   (max, width, 1000px): inside-navigation
+ * )
+ */
 $carousel-buttons-positions-map: (
-  // #region Valid positions: 
-  // outside-carousel
-  // feet-carousel
-  // head-carousel
-  // inside-carousel
-  // left-carousel
-  // right-carousel
-  // display-none 
-  // #endregion
-  (min, width, 1000px): outside-carousel,
-  (max, width, 1000px): feet-carousel,
-  (max, width, 661px): inside-carousel,
-  (max, width, 375px): display-none
+  feet-carousel
 );
 $carousel-buttons-position-outside-carousel: (horizontal-offset: 2.75rem, vertical-offset: 0.0rem);
 $carousel-buttons-position-inside-carousel:  (horizontal-offset: 2.75rem, vertical-offset: 0.0rem);
 $carousel-buttons-position-feet-carousel:    (horizontal-offset: 0.00rem, vertical-offset: 3.5rem);
 $carousel-buttons-position-right-carousel:   (horizontal-offset: 1.25rem, vertical-offset: 0.0rem);
 $carousel-buttons-position-left-carousel:    (horizontal-offset: 0.00rem, vertical-offset: 0.0rem);
+$carousel-buttons-position-inside-navigation: (
+  margins-from-scroll-markers-group-when-default: 1rem,             // Only works with buttons position inside navigation
+  margins-from-scroll-markers-group-when-use-counter-numbers: 2rem, // Only works with buttons position inside navigation
+  margins-from-scroll-markers-group-when-use-slide-image: 2rem,     // Only works with buttons position inside navigation
+);
 $carousel-buttons-borders: 0px 0px 0px 2px white; // It's a box shadow but we use it as border
 $carousel-buttons-box-shadows: $carousel-buttons-borders;
 $carousel-buttons-background: transparent; 
-$carousel-buttons-color: red;            
+$carousel-buttons-color: red; 
+
 $carousel-buttons-arrow-icon-shape: 1; // The SVG Shape (1-3)
 $carousel-buttons-arrow-icon-inset: 0;
 $carousel-buttons-arrow-icon-rescale: 1; // Leave it
@@ -68,18 +90,17 @@ $carousel-buttons-arrow-icon-outline: 0.75;
 $carousel-buttons-arrow-icon-outline-offset: 0;
 $carousel-buttons-arrow-icon-outline-color: white;
 
-$carousel-scroll-marker-group-position: after; // Use none if you want to not display it - OR - before || after
-$carousel-scroll-marker-group-orientation: horizontal;
-$carousel-scroll-marker-group-self-justification: center;
-$carousel-scroll-marker-group-self-alignment: center; // Leave it
-$carousel-scroll-marker-group-length: 50%; //Container: 'carousel'
-$carousel-scroll-marker-group-gap: clamp(0.75rem, 8cqw, 1.5rem);
-
+/*Todo: Make this map? */ $carousel-scroll-marker-group-position: after; // Use none if you want to not display it - OR - before || after
+/*Todo: Make this map? */ $carousel-scroll-marker-group-orientation: horizontal; //
+/*Todo: Make this map? */ $carousel-scroll-marker-group-self-justification: center;
+/*Todo: Make this map? */ $carousel-scroll-marker-group-self-alignment: center; // Leave it - Questo si può anche togliere dato che sarà sempre center
+/*Todo: Make this map? */ $carousel-scroll-marker-group-gap: 1.75rem;
 $carousel-scroll-marker-backgrounds:(
   (min, width, 1400px): use-slide-image,
   (max, width, 1400px): use-counter-numbers,
   (max, width, 1000px): use-default
 );
+
 $carousel-scroll-marker-style:(
   use-default:(
     width: clamp(0.95rem, 6.75cqw, 2rem),
